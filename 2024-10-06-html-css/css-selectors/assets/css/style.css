@@ -1,0 +1,67 @@
+h1 {
+    color: green;
+    background-color: yellow;
+}
+p {
+    color: red;
+    border: 1px dotted blue;
+}
+.cool-design {
+    color: blue;
+    background-color: red;
+}
+.cool-design-big {
+    font-size: xx-large;
+    font-weight: bold;
+}
+
+.cool-design-small {
+    font-size: xx-small;
+}
+
+#last-paragraph {
+    font-size: xx-small;
+    text-decoration: underline;
+    font-style: italic;
+}
+
+input[placeholder] {
+    background-color: yellow;
+}
+
+input[placeholder="first name"] {
+    border: 3px dashed;
+}
+
+a {
+    color: yellow;
+}
+
+a:visited {
+    color: red;
+}
+
+a:hover {
+    color: green;
+    font-size: x-large;
+}
+
+p::first-line{
+    color: blue;
+    font-size: xx-large;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+/* all a tags that have a p tag as a parent somewhere */
+p a{
+    color: black;
+}
+
+/* all a tags that have a p tag as a direct! parent */
+p > a{
+    color: black;
+}

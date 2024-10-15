@@ -1,0 +1,53 @@
+html, body{
+    direction: rtl;
+    margin: 0;
+    padding: 0;
+    background-image: url('/assets/images/wood-background.png');    
+}
+
+.header-text {
+    text-align: center;
+    color: darkred;
+}
+
+.welcome-text {
+    text-align: center;
+    font-size: larger;
+}
+
+.login-table{
+    margin-left:auto; 
+    margin-right:0;
+    border-style: solid;
+    border-color: black;
+    border-width: 0.5px;
+    text-align: left;
+}
+
+.left{
+    margin-left:auto; 
+    margin-right:0;
+}
+
+input{
+    background-color: yellow;
+}
+
+input[type="submit"]{
+    background-color: rgb(163, 200, 195);
+}
+
+#img-container{
+    margin-top: 100px;
+    text-align: center;
+}
+
+img {
+    width: 100px;
+    height: 100px;
+}
+
+#copyrights{
+    font-weight: bold;
+    text-align: center;
+}

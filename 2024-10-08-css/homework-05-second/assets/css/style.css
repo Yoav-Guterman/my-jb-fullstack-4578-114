@@ -1,0 +1,36 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 10% 90%;
+    grid-template-rows: 10% 80% 10%;
+    border: 1px solid black;
+}
+
+.container>* {
+    border: 1px solid black;
+}
+
+header,
+footer {
+    grid-column: span 4;
+    align-content: center;
+    text-align: center;
+}
+
+.menu {
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    grid-column: span 3;
+
+}

@@ -1,0 +1,34 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* the container */
+.container {
+    display: flex;
+    height: 100vh;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+/* the box */
+.container>div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid black;
+    font-size: xx-large;
+    color: white;
+    font-family: Arietta;
+    border-radius: 75px;
+    background-image: linear-gradient(45deg, yellow, black, red, blue);
+    box-shadow: 30px 20px 50px black;
+    height: 350px;
+    width: 700px;
+}
+
+@font-face {
+    font-family: Arietta;
+    src: url('/assets/fonts/Arietta Hudson.otf');
+}

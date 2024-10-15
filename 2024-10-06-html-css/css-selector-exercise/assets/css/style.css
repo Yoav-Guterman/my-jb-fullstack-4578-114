@@ -1,0 +1,14 @@
+html, body{
+    margin: 0;
+    padding: 0;
+}
+
+input[type="search"] { 
+    background-color: yellow;
+}
+
+.centered-content {
+    text-align: center;
+    border: black;
+    border-style: solid;
+  }

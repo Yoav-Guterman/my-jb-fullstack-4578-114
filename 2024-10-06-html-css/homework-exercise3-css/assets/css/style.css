@@ -1,0 +1,30 @@
+html, body{
+    margin: 0;
+    padding: 0;
+    background-color: rgb(184, 246, 246);
+}
+
+a{
+    font-size: large;
+}
+
+a:hover{
+    color: green;
+}
+
+.text-center{
+    text-align: center;
+}
+
+.item-center{
+    object-position: center;
+}
+
+span {
+    display: inline-block; /* Makes the span respect width and margin */
+    width: 50px; /* Fixed space */
+}
+
+.table-container {
+    margin: 0 auto; /* Center the table */
+}

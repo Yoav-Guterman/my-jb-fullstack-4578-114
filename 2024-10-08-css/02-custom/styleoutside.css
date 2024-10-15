@@ -1,0 +1,65 @@
+/* also pretty important */
+@font-face {
+    font-family: Arietta;
+    src: url('/fonts/Arietta\ Hudson.otf');
+}
+
+h1 {
+    text-align: center;
+    font-family: Arietta;
+    transition: 2s;
+    transform: rotate(15deg) scale(0.5);
+}
+
+h1:hover {
+    color: green;
+    transform: rotate(-15deg) scale(3);
+}
+
+@keyframes MyAnima {
+    from {
+        color: blue;
+        transform: scale(1.5);
+    }
+    to {
+        color: red;
+        transform: scale(0.5);
+    }
+}
+
+@keyframes MyLongAnima {
+    0% {
+        color: blue;
+        transform: scale(2);
+    }
+    50% {
+        color: green;
+        transform: scale(0.5);
+    }
+    100% {
+        color: yellow;
+        transform: scale(4);
+    
+    }
+}
+
+p {
+    text-align: center;
+    margin-top: 100px;
+    animation: MyAnima 3s; 
+}
+
+p:hover {
+    animation: MyLongAnima 3s infinite;
+}
+
+h2 {
+    font-size: 16px;
+}
+
+/* most important */
+@media (max-width: 600px) {
+    h2 {
+        font-size: 32px;
+    }
+}

@@ -1,0 +1,26 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    background-color: rgb(27, 27, 27);
+}
+
+input{
+    color: white;
+}
+
+a {
+    color: white;
+}
+
+a:hover{
+    color: green;
+}
+
+.dark-theme-text{
+    color: rgb(226, 226, 226);
+    font-size: large;
+}
+
+.center-text{
+    text-align: center;
+}

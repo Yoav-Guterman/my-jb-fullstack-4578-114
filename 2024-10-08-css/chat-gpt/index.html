@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flexbox Centering</title>
+    <style>
+        .flex-container {
+            display: flex;
+            /* Enable Flexbox */
+            height: 100vh;
+            /* Full viewport height */
+            justify-content: center;
+            /* Center horizontally */
+            align-items: center;
+            /* Center vertically */
+            background-color: #f0f0f0;
+            /* Light background for visibility */
+        }
+
+        .content {
+            padding: 20px;
+            background-color: #007BFF;
+            /* Blue background for content */
+            color: white;
+            /* White text color */
+            border-radius: 5px;
+            /* Rounded corners */
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="flex-container">
+        <div class="content">
+            <h1>Centered Content</h1>
+            <p>This content is centered both horizontally and vertically using Flexbox.</p>
+        </div>
+    </div>
+
+</body>
+
+</html>

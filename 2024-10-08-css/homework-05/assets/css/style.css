@@ -1,0 +1,75 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    size: 100%;
+    background: linear-gradient(45deg, #ff3838, #ffabab);
+}
+
+.container {
+    size: 100%;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(20 1fr);
+    grid-template-rows: repeat(10, 1fr);
+}
+
+.container>* {
+    border: 1px solid black;
+}
+
+header {
+    grid-column: span 20;
+    grid-row: span 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu {
+    grid-column: span 4;
+    grid-row: span 7;
+    padding: 30px;
+    display: grid;
+    grid-template-columns: repeat(1 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    text-align: center;
+}
+
+main {
+    grid-column: span 16;
+    grid-row: span 7;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#home-iframe {
+    display: flex;
+    width: 50%;
+    /* Adjust width as needed */
+    height: 300px;
+    /* Adjust height as needed */
+    border: none;
+    /* Optional, removes default border */
+    justify-content: center;
+    /* Center the iframe */
+    width: 100%;
+    /* Full width */
+}
+
+.home-text {
+    margin-bottom: 20px;
+}
+
+
+footer {
+    grid-column: span 20;
+    grid-row: span 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: larger;
+}

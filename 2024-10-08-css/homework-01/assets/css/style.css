@@ -1,0 +1,33 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+
+.container {
+    display: flex;
+    height: 500px;
+    justify-content: space-around;
+
+}
+
+
+.container>p {
+    padding: 20px;
+    border: 3px solid black;
+    height: 100px;
+    width: 250px;
+}
+
+.container> :nth-child(1) {
+    color: red;
+}
+
+.container> :nth-child(2) {
+    color: rgb(234, 234, 116);
+}
+
+.container> :nth-child(3) {
+    color: rgb(56, 229, 56);
+}

@@ -1,0 +1,29 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.row>div {
+    height: 50px;
+    border: 1px solid black;
+    text-align: center;
+    font-size: x-large;
+}
+
+.row>div:nth-child(1) {
+    background-color: red;
+}
+
+.row>div:nth-child(2) {
+    background-color: green;
+}
+
+.row>div:nth-child(3) {
+    background-color: blue;
+}
+
+.row>div:nth-child(4) {
+    background-color: yellow;
+}
