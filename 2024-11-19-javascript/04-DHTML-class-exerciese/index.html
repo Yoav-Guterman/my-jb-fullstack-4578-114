@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script defer src="assets/js/app.js"></script>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+
+    <form id="carForm" onsubmit="addCarToTable(event)">
+        <label for="carName">car name</label>
+        <input id="carName" type="text" required>
+        <br><br>
+
+        <label for="engineVolume">engine Volume</label>
+        <input id="engineVolume" type="number" required>
+        <br><br>
+
+        <label for="carColor">car Color</label>
+        <input id="carColor" type="color" required>
+        <br><br>
+
+        <label for="imageUrl">image URL</label>
+        <input id="imageUrl" type="text" required>
+        <br><br>
+
+        <button>Add to Table</button>
+
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>car Name</th>
+                <th>engine volume</th>
+                <th>image</th>
+            </tr>
+        </thead>
+        <tbody id="carsContainer">
+
+        </tbody>
+    </table>
+
+</body>
+
+</html>

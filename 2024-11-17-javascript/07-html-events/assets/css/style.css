@@ -1,0 +1,13 @@
+button {
+    font-size: 18px;
+    background-color: blue;
+    color: white;
+    border-radius: 5px;
+}
+
+div {
+    height: 300px;
+    width: 300px;
+    background-color: aqua;
+    color: white;
+}

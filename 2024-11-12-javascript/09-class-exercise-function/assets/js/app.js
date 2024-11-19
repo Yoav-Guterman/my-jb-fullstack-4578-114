@@ -77,9 +77,23 @@
 // }
 
 //exercise 4
-const num = +prompt("please enter a number");
+// const num = +prompt("please enter a number");
 
-function isPositive(num) {
-    return num > 0
+// function isPositive(num) {
+//     return num > 0
+// }
+// console.log(`${num} is positive: ${isPositive(num)}`)
+
+// exercise 5
+
+const num = +p
+rompt("please enter a number");
+
+function getAbsoluteValue(num) {
+    if (num < 0){
+        num = num * -1
+    }
+    return num
 }
-console.log(`${num} is positive: ${isPositive(num)}`)
+
+document.write(`the abs number of ${num} is: ${getAbsoluteValue(num)}`)

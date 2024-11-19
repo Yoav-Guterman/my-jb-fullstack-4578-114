@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="assets/js/app.js"> </script>
+</head>
+
+<body>
+    <form action="save.html" method="get" onsubmit="validate()">
+        <label>first Name:</label>
+        <input id="firstName" type="text" name="firstName" minlength="2" maxlength="30" required>
+        <br><br>
+
+        <label>last Name:</label>
+        <input id="lastName" type="text" name="lastName" minlength="2" maxlength="30" required>
+        <br><br>
+
+        <label>email:</label>
+        <input id="email" type="email" name="email" minlength="2" maxlength="30">
+        <br><br>
+
+        <label>phone number:</label>
+        <input id="phoneNumber" type="tel" name="phoneNumber" minlength="2" maxlength="30">
+        <br><br>
+
+        <label>message:</label>
+        <textarea name="message" id="message" minlength="2" maxlength="500" required></textarea>
+        <br><br>
+
+        <button type="submit">Send</button>
+    </form>
+</body>
+
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="assets/js/app.js"></script>
+</head>
+
+<body>
+    <h1 class="text-center">the most amazing pet store!</h1>
+    <hr>
+    <div class="text-center">
+        <nav>
+            <a href="contact-us.html">contact</a>
+            <span> </span>
+            <a href="animals.html">Animals</a>
+            <span> </span>
+            <a href="index.html">Home page</a>
+        </nav>
+    </div>
+
+    <h2>contact us!</h2>
+
+    <form action="save.html" method="get" id="contactUsForm" onsubmit="validateForm(event)">
+        <table>
+            <tbody>
+                <tr>
+                    <td>first name:</th>
+                    <td><input id="firstName" type="text" placeholder="first name"></th>
+                </tr>
+                <tr>
+                    <td>family name:</td>
+                    <td><input id="familyName" type="text" placeholder="family name"></td>
+                </tr>
+                <tr>
+                    <td>Gender</td>
+                    <td>
+                        <input type="radio" id="Male" name="fav_language" value="Male">
+                        <label for="Male">Male</label><br>
+                        <input type="radio" id="Female" name="fav_language" value="Female">
+                        <label for="Female">Female</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>City</td>
+                    <td><select name="city" id="city">
+                            <option value="Choose a city" selected disabled>choose a city...</option>
+                            <option value="Tel Aviv">Tel Aviv</option>
+                            <option value="Herzeliya">Herzeliya</option>
+                            <option value="Petah tikva">Petah tikva</option>
+                            <option value="yehud">yehud</option>
+                        </select></td>
+                </tr>
+                <tr>
+                    <td>message us:</td>
+                    <td><textarea name="message" id="message"></textarea></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><button type="submit">submit</button></td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+    </form>
+
+    <br>
+    <p class="text-center">&copy; all right reverves 2024</p>
+</body>
+
+</html>
