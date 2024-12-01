@@ -40,8 +40,6 @@ function validateForm(event) {
     }
 
     if (isFirstName && isFamilyName && isMessage) {
-        return true
-    } else {
-        return false
+        document.getElementById('contactUsForm').submit()
     }
 }
