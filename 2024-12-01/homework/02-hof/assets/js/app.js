@@ -70,9 +70,9 @@
 // const min = pointsArray.reduce((min, point) => point.xAxis < min ? point.xAxis : min, pointsArray[0].xAxis)
 
 // // את אובייקט הנקודה בעלת ה-x המינימלי.
-const min = pointsArray.reduce((min, point) => point.xAxis < min ? point.xAxis : min, pointsArray[0].xAxis)
-const minPoint = pointsArray.find(point => point.xAxis === min)
-console.log(minPoint)
+// const min = pointsArray.reduce((min, point) => point.xAxis < min ? point.xAxis : min, pointsArray[0].xAxis)
+// const minPoint = pointsArray.find(point => point.xAxis === min)
+// console.log(minPoint)
 
 //exercise 3
 // const randomNumber = (max, min) => Math.floor((Math.random() * (max - min)) + min)
@@ -125,12 +125,12 @@ console.log(minPoint)
 // const pizzaRadius = pizzaArray.map(pizza => pizza.diameter / 2)
 // console.log(pizzaRadius)
 // // עבור כל פיצה – אובייקט חדש המכיל: price (מחיר מקורי) vat (ערך המע"מ של המחיר כאשר המחיר המקורי הוא מחיר כולל מע"מ).
-// const pizzaVat = pizzaArray.map(pizza => {
-//     return {
-//         price: pizza.price,
-//         vatPrice: pizza.price * 0.17
-//     }
-// })
+const pizzaVat = pizzaArray.map(pizza => {
+    return {
+        price: pizza.price,
+        vatPrice: pizza.price * 0.17
+    }
+})
 // console.log(pizzaVat)
 // // את סכום כל מחירי הפיצות.
 // const sumOfAllPizzas = pizzaArray.reduce((sum, pizza) => sum + pizza.price, 0)
