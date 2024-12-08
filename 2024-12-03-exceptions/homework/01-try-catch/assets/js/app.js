@@ -6,7 +6,7 @@ const sizeArray = event => {
         if (isNaN(size) || size <= 0) throw new Error('enter valid array length')
         for (let i = 0; i < size; i++) {
             const number = +prompt(`enter number for the array .\n${i + 1} out of ${size}`)
-            if (isNaN(number) || null || undefined) throw new Error('enter valid number')
+            if (isNaN(number) || number === null || number === undefined) throw new Error('enter valid number')
             numArray.push(number)
         }
         console.log(`the average is: ${getAverage(numArray)}`)
