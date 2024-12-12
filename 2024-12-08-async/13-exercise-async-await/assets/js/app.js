@@ -7,7 +7,8 @@
         return new Promise((resolve, reject) => {
             setTimeout(() => {
                 if (num % 3 === 0) reject('number is divider of 3')
-                resolve(num ** 2)
+                resolve(num ** 2
+            )
             }, 2000)
         })
     }
