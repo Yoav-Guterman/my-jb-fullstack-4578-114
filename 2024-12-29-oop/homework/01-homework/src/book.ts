@@ -8,7 +8,7 @@ export default class Book {
     }
 
     public display() {
-        console.log(`author ${this.author}`)
+        console.log(`author: ${this.author}`)
         console.log(`bookName: ${this.bookName}`)
         console.log(`publish: ${this.publish}`)
         console.log(`price: ${this.price}`)
