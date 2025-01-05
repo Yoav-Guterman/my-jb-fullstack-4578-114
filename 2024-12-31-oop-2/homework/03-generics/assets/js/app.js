@@ -1,0 +1,13 @@
+import Backup from "./backup.js";
+import Kitten from "./kitten.js";
+const backupString = new Backup("User's notes backup", "these are my notes...");
+backupString.display();
+const backupNumber = new Backup('high score backup', 9999);
+backupNumber.display();
+const backupBoolean = new Backup('is this a good app', true);
+backupBoolean.display();
+const backupDate = new Backup('when did you born?', new Date("2002-04-19"));
+backupDate.display();
+const gingo = new Kitten('gingo', 2, 'orange');
+const backupObject = new Backup('my cat is gingo', gingo);
+backupObject.display();
