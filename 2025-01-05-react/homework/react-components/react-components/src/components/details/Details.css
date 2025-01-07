@@ -1,0 +1,13 @@
+img {
+    max-height: 200px;
+}
+
+.details {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.dogPicture {
+    justify-content: center;
+}

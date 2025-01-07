@@ -1,0 +1,9 @@
+.petStore>p {
+    color: green;
+}
+
+.petStore {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid green;
+}
