@@ -15,11 +15,15 @@ export default function Followers() {
 
     return (
         <div className='Followers'>
-            <p>Following:</p>
+            <p>Followers:</p>
             <ul>
                 {users.map(({ id, username }) => <li key={id} >{username}</li>)}
             </ul>
             <h4>you have {users.length} followers</h4>
+            <p>Following:</p>
+            <p>Following:</p>
+            <p>Following:</p>
+            <p>Following:</p>
         </div>
     )
 }

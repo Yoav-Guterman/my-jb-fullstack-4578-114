@@ -3,6 +3,20 @@
     display: grid;
     grid-template-columns: 1fr 3fr;
     grid-template-rows: 1fr 3fr 3fr 1fr;
+    min-height: 0;
+    /* Important for nested grids */
+}
+
+.Layout>* {
+    border: 1px solid black;
+    overflow: auto;
+    /* Adds scrollbars when content overflows */
+    min-height: 0;
+    /* Allows content to shrink */
+    min-width: 0;
+    /* Allows content to shrink horizontally */
+    padding: 10px;
+    /* Optional: adds some spacing inside each area */
 }
 
 .Layout>header {
