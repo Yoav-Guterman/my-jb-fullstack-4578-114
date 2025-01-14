@@ -1,0 +1,14 @@
+.NewPost {
+    border: 1px dashed cyan;
+    margin: 4px;
+    padding: 4px;
+}
+
+.NewPost>form {
+    display: flex;
+    flex-direction: column;
+}
+
+.NewPost .error {
+    color: red;
+}

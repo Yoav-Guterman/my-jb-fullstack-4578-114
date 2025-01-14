@@ -1,0 +1,23 @@
+.Header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.Header nav {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.Header a {
+    text-decoration: none;
+    color: black;
+
+}
+
+
+.Header .active {
+    padding-bottom: 5px;
+    border-bottom: 2px solid black;
+}
