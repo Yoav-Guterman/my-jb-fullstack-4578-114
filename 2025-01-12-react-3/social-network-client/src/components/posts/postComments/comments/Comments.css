@@ -1,0 +1,22 @@
+.Comments {
+    margin-top: 10px;
+    padding: 10px;
+    border-top: 1px solid #eee;
+}
+
+.comments-list {
+    margin-top: 10px;
+}
+
+.comment {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.comment-header {
+    font-size: 0.9em;
+    color: #666;
+    margin-bottom: 5px;
+}
