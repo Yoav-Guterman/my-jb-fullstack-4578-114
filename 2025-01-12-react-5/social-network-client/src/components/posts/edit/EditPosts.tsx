@@ -34,11 +34,7 @@ export default function EditPost(): JSX.Element {
         try {
             if (id) {
                 setEditPostLoading(true)
-                console.log(post)
-                console.log(id)
-                console.log(draft)
                 const postFromServer = await profileService.update(id, draft)
-                console.log(postFromServer)
                 dispatch(update(postFromServer))
                 Navigate('/profile')
             }

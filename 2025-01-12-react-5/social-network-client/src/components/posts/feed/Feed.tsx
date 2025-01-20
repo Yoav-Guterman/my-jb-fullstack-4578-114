@@ -12,17 +12,19 @@ import { init } from '../../../redux/feedSlice'
 export default function Feed() {
 
     const posts = useAppSelector(state => state.feed.posts)
-
     const dispatch = useAppDispatch()
+
     useTitle('SN- Feed')
 
     useEffect(() => {
         (async () => {
             try {
-                const postsFromServer = await feed.getFeed()
-                dispatch(init(postsFromServer))
+                if (posts.length === 0) {
+                    const postsFromServer = await feed.getFeed()
+                    dispatch(init(postsFromServer))
+                }
             } catch (e) {
-                console.log(e)
+                alert(e)
             }
         })()
     }, [])
@@ -33,8 +35,8 @@ export default function Feed() {
             {posts.length === 0 &&
                 <div className='feed-loading'>
                     <Loading size={LoadingSize.LARGE} />
-                </div>}
 
+                </div>}
 
             {posts.length > 0 && <>
 

@@ -35,7 +35,7 @@ export default function Follow(props: FollowProps): JSX.Element {
     async function follow() {
         try {
             setIsLoading(true)
-            await followingService.unfollow(id)
+            await followingService.follow(id)
             dispatch(followAction(props.user))
         } catch (e) {
             console.log(e)
