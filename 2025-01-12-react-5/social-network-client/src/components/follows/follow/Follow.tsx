@@ -4,15 +4,19 @@ import User from '../../../models/user/User'
 import profilePicSource from '../../../assets/images/profilePic.jpg'
 import { useState } from 'react'
 import LoadingButton from '../../common/loadingButton/LoadingButton'
+import { useAppDispatch, useAppSelector } from '../../../redux/hooks'
+import { unfollow as unfollowAction, follow as followAction } from '../../../redux/followingSlice'
 
 interface FollowProps {
     user: User
-    removeFromFollowingList(userId: string): void
 }
 
 export default function Follow(props: FollowProps): JSX.Element {
-    const { user: { id, name }, removeFromFollowingList } = props
+    const { user: { id, name } } = props
     const [isLoading, setIsLoading] = useState<boolean>(false)
+
+    const dispatch = useAppDispatch()
+    const isFollowing = useAppSelector(state => state.following.following.findIndex(f => f.id === id) > -1)
 
 
     async function unfollow() {
@@ -20,11 +24,24 @@ export default function Follow(props: FollowProps): JSX.Element {
             try {
                 setIsLoading(true)
                 await followingService.unfollow(id)
-                removeFromFollowingList(id)
-                setIsLoading(false)
+                dispatch(unfollowAction({ userId: id }))
             } catch (e) {
                 console.log(e)
+            } finally {
+                setIsLoading(false)
             }
+    }
+
+    async function follow() {
+        try {
+            setIsLoading(true)
+            await followingService.unfollow(id)
+            dispatch(followAction(props.user))
+        } catch (e) {
+            console.log(e)
+        } finally {
+            setIsLoading(false)
+        }
     }
 
     return (
@@ -36,9 +53,17 @@ export default function Follow(props: FollowProps): JSX.Element {
                 {name}
             </div>
             <div>
-                {isLoading ? <LoadingButton message={'unfollowing'} /> :
-                    <button type="button" className="btn btn-outline-success btn-sm" onClick={unfollow}>unfollow</button>
-                }
+                {isFollowing && isLoading &&
+                    <LoadingButton message={'unfollowing'} />}
+
+                {isFollowing && !isLoading && <button type="button" className="btn btn-outline-success btn-sm" onClick={unfollow}>unfollow</button>}
+
+
+                {!isFollowing && isLoading &&
+                    <LoadingButton message={'follow'} />}
+
+                {!isFollowing && !isLoading &&
+                    <button type="button" className="btn btn-outline-success btn-sm" onClick={follow}>follow</button>}
             </div>
         </div>
     )

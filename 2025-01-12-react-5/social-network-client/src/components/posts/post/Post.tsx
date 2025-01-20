@@ -3,37 +3,36 @@ import PostModel from '../../../models/post/Post'
 import profileService from '../../../services/profile'
 import { useNavigate } from 'react-router-dom'
 import Comments from '../postComments/comments/Comments'
-import CommentModel from '../../../models/comment/Comment'
 import LoadingButton from '../../common/loadingButton/LoadingButton'
 import { useState } from 'react'
+import { remove } from '../../../redux/profileSlice'
+import { useAppDispatch } from '../../../redux/hooks'
 
 interface PostProps {
     post: PostModel
     isAllowActions?: boolean
-    remove?(id: string): void
-    addComment(comment: CommentModel): void
-
 }
 
 export default function Post(props: PostProps): JSX.Element {
     const { title, body, createdAt, id, comments } = props.post
     const { name } = props.post.user
-    const { addComment } = props
     const navigate = useNavigate()
     const [isLoading, setIsLoading] = useState<boolean>(false)
 
+
+
+    const dispatch = useAppDispatch()
+
     async function deleteMe() {
-        if (props.remove && confirm(`are you sure you want to delete "${title}"`))
+        if (confirm(`are you sure you want to delete "${title}"`))
             try {
                 setIsLoading(true)
                 await profileService.remove(id)
-                props.remove(id)
-                setIsLoading(false)
-                // i was able to delete from the server
-                // this is the point to affect the UI
-                // in other words, we need to change the state
+                dispatch(remove({ id }))
             } catch (e) {
                 alert(e)
+            } finally {
+                setIsLoading(false)
             }
     }
 
@@ -63,7 +62,6 @@ export default function Post(props: PostProps): JSX.Element {
             <Comments
                 comments={comments}
                 postId={id}
-                addComment={addComment}
             />
         </div>
     )

@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import User from "../models/user/User";
-import Following from "../components/follows/following/Following";
 
 interface FollowingState {
     following: User[]
@@ -19,7 +18,7 @@ export const followingSlice = createSlice({
         },
         unfollow: (state, action: PayloadAction<{ userId: string }>) => {
             state.following = state.following.filter(f => f.id !== action.payload.userId)
-        }
+        },
         follow: (state, action: PayloadAction<User>) => {
             state.following.push(action.payload)
         }

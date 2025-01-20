@@ -2,29 +2,29 @@ import { useForm } from 'react-hook-form'
 import './NewPost.css'
 import PostDraft from '../../../models/post/PostDraft'
 import profileService from '../../../services/profile'
-import Post from '../../../models/post/Post'
 import { useState } from 'react'
 import LoadingButton from '../../common/loadingButton/LoadingButton'
+import { useDispatch } from 'react-redux'
+import { newPost } from '../../../redux/profileSlice'
 
-interface NewPostProps {
-    addPost(post: Post): void
-}
 
-export default function NewPost(props: NewPostProps): JSX.Element {
+export default function NewPost(): JSX.Element {
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const { register, handleSubmit, reset, formState } = useForm<PostDraft>()
+
+    const dispatch = useDispatch()
 
     async function submit(draft: PostDraft) {
         try {
             setIsLoading(true)
-            const NewPost = await profileService.create(draft)
+            const NewPostFromServer = await profileService.create(draft)
+            dispatch(newPost(NewPostFromServer))
             reset()
-            props.addPost(NewPost)
+
         } catch (e) {
             alert(e)
         } finally {
             setIsLoading(false)
-            reset()
         }
     }
 

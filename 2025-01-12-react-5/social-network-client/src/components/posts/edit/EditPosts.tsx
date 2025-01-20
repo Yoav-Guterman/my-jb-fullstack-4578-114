@@ -5,38 +5,47 @@ import PostDraft from '../../../models/post/PostDraft'
 import profileService from '../../../services/profile'
 import './EditPosts.css'
 import LoadingButton from '../../common/loadingButton/LoadingButton'
+import { useAppDispatch, useAppSelector } from '../../../redux/hooks'
+import { update } from '../../../redux/profileSlice'
 
 export default function EditPost(): JSX.Element {
     const [editPostLoading, setEditPostLoading] = useState<boolean>(false)
-    const [editPostDataLoading, setEditPostDataLoading] = useState<boolean>(false)
 
     const { id } = useParams<'id'>()
     const { handleSubmit, register, formState, reset } = useForm<PostDraft>()
     const Navigate = useNavigate()
 
-    useEffect(() => {
-        if (id) {
-            setEditPostDataLoading(true)
-            profileService.getPost(id)
-                .then(data => {
-                    reset(data)
-                    setEditPostDataLoading(false)
-                })
-                .catch(alert)
-        }
+    const post = useAppSelector(state => state.profile.posts).find(p => p.id === id)
+    const dispatch = useAppDispatch()
 
-    }, [])
+    useEffect(() => {
+        if (post) {
+            reset({
+                title: post.title,
+                body: post.body
+            })
+        } else {
+            alert('Post not found')
+            Navigate('/profile')
+        }
+    }, [post, reset, Navigate])
 
     async function submit(draft: PostDraft) {
         try {
             if (id) {
                 setEditPostLoading(true)
-                await profileService.update(id, draft)
+                console.log(post)
+                console.log(id)
+                console.log(draft)
+                const postFromServer = await profileService.update(id, draft)
+                console.log(postFromServer)
+                dispatch(update(postFromServer))
                 Navigate('/profile')
-                setEditPostLoading(false)
             }
         } catch (e) {
             alert(e)
+        } finally {
+            setEditPostLoading(false)
         }
     }
 
@@ -67,13 +76,8 @@ export default function EditPost(): JSX.Element {
                     }
                 )}></textarea>
                 <span className='error'>{formState.errors.body?.message}</span>
-                {editPostLoading &&
-                    <LoadingButton message={'updating post'} />}
-
-                {editPostDataLoading &&
-                    <LoadingButton message={'loading post data'} />}
-
-                {!editPostLoading && !editPostDataLoading &&
+                {editPostLoading ?
+                    <LoadingButton message={'updating post'} /> :
                     <button>Update Post</button>}
 
             </form>

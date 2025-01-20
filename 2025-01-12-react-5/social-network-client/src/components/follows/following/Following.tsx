@@ -1,25 +1,28 @@
-import { useEffect, useState } from 'react'
+import { useEffect, } from 'react'
 import './Following.css'
-import User from '../../../models/user/User'
-import following from '../../../services/following'
+import followingService from '../../../services/following'
 import Follow from '../follow/Follow'
 import Loading from '../../common/loading/Loading'
 import { LoadingSize } from '../../../models/loading/loadingSize'
+import { useAppDispatch, useAppSelector } from '../../../redux/hooks'
+import { init } from '../../../redux/followingSlice'
 
 export default function Following() {
 
-    const [users, setUsers] = useState<User[]>([])
+    const following = useAppSelector(state => state.following.following)
+
+    const dispatch = useAppDispatch()
 
     useEffect(() => {
-        following.getUsers()
-            .then(setUsers)
-            .catch(alert)
+        (async () => {
+            try {
+                const following = await followingService.getUsers()
+                dispatch(init(following))
+            } catch (e) {
+                console.log(e)
+            }
+        })()
     }, [])
-
-    function removeFromFollowingList(userId: string): void {
-        const newFollowing = users.filter(f => f.id !== userId)
-        setUsers(newFollowing)
-    }
 
     return (
         <div className='Following'>
@@ -28,13 +31,12 @@ export default function Following() {
             </div>
             <div className='im-following'>
 
-                {users.length === 0 && <Loading size={LoadingSize.MEDIUM} />}
+                {following.length === 0 && <Loading size={LoadingSize.MEDIUM} />}
 
-                {users.length > 0 && <>
-                    {users.map(follow => <Follow
+                {following.length > 0 && <>
+                    {following.map(follow => <Follow
                         key={follow.username}
                         user={follow}
-                        removeFromFollowingList={removeFromFollowingList}
                     ></Follow>)}
                 </>}
             </div>

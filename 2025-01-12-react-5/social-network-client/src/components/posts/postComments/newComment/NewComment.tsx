@@ -2,20 +2,22 @@ import { useForm } from 'react-hook-form'
 import './NewComment.css'
 import CommentDraft from '../../../../models/comment/CommentDraft'
 import commentsService from '../../../../services/comment'
-import CommentModel from '../../../../models/comment/Comment'
 import { useState } from 'react'
 import LoadingButton from '../../../common/loadingButton/LoadingButton'
+import { useAppDispatch } from '../../../../redux/hooks'
+import { addComment as addCommentProfile } from '../../../../redux/profileSlice'
+import { addComment as addCommentFeed } from '../../../../redux/feedSlice'
+
 
 interface NewCommentProps {
     postId: string
-    addComment(comment: CommentModel): void
 }
 
 export default function NewComment(props: NewCommentProps): JSX.Element {
 
     const [isLoading, setIsLoading] = useState<boolean>(false)
 
-    const { postId, addComment } = props
+    const { postId } = props
     const {
         register,
         handleSubmit,
@@ -23,15 +25,19 @@ export default function NewComment(props: NewCommentProps): JSX.Element {
         reset
     } = useForm<CommentDraft>()
 
+    const dispatch = useAppDispatch()
+
     async function submit(draft: CommentDraft) {
         try {
             setIsLoading(true)
             const newComment = await commentsService.create(postId, draft)
             reset()
-            addComment(newComment)
-            setIsLoading(false)
+            dispatch(addCommentProfile(newComment))
+            dispatch(addCommentFeed(newComment))
         } catch (e) {
             console.warn(e)
+        } finally {
+            setIsLoading(false)
         }
     }
 
