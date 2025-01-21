@@ -1,0 +1,18 @@
+.Post {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid black;
+    padding: 4px;
+    margin: 10px;
+}
+
+.Post .buttons {
+    margin-right: 5px;
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}
+
+.Post>div {
+    margin-bottom: 5px;
+}
