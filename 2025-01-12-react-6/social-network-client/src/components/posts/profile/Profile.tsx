@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
 import './Profile.css'
-import profile from '../../../services/auth-aware/profile'
 import Post from '../post/Post'
 import NewPost from '../new/NewPost'
 import Loading from '../../common/loading/Loading'
@@ -8,7 +7,8 @@ import useTitle from '../../../hooks/useTitle'
 import { LoadingSize } from '../../../models/loading/loadingSize'
 import { init } from '../../../redux/profileSlice'
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks'
-
+import useService from '../../../hooks/useService'
+import ProfileService from '../../../services/auth-aware/profile'
 
 export default function Profile() {
 
@@ -17,7 +17,10 @@ export default function Profile() {
 
     const posts = useAppSelector(state => state.profile.posts)
 
+    const profileService = useService(ProfileService)
+
     const dispatch = useAppDispatch()
+
     useEffect(() => {
         (async () => {
             try {
