@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import './Profile.css'
-import profile from '../../../services/profile'
+import profile from '../../../services/auth-aware/profile'
 import Post from '../post/Post'
 import NewPost from '../new/NewPost'
 import Loading from '../../common/loading/Loading'

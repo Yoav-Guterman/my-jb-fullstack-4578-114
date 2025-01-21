@@ -1,7 +1,19 @@
 import { NavLink } from 'react-router-dom'
 import './Header.css'
+import useUsername from '../../../hooks/useUsername'
+import { useContext } from 'react'
+import { AuthContext } from '../../auth/auth/Auth'
 
 export default function Header() {
+
+    const name = useUsername()
+
+    const { logOut } = useContext(AuthContext)!
+
+    function logMeOut() {
+        logOut()
+    }
+
     return (
         <div className='Header'>
             <div>
@@ -9,19 +21,13 @@ export default function Header() {
             </div>
             <div>
                 <nav>
-                    {/* we dont want to use a tags for inner 
-                    app navigation as it breaks SPA!!! */}
-                    {/* <a href="/profile">profile</a>
-                    <a href="/feed">feed</a> */}
-
-                    {/* we can use <link> instead */}
-                    {/* <Link to="/profile">profile</Link>
-                    <Link to="/feed">feed</Link> */}
-
-                    {/* but the best option is <NavLink> */}
                     <NavLink to="/profile">profile</NavLink>
                     <NavLink to="/feed">feed</NavLink>
+                    {/* <NavLink to="/search">search</NavLink> */}
                 </nav>
+                <div>
+                    Hello {name} | <button onClick={logMeOut}>logout</button>
+                </div>
             </div>
         </div>
     )

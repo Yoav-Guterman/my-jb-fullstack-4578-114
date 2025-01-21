@@ -1,6 +1,6 @@
 import './Post.css'
 import PostModel from '../../../models/post/Post'
-import profileService from '../../../services/profile'
+import profileService from '../../../services/auth-aware/profile'
 import { useNavigate } from 'react-router-dom'
 import Comments from '../postComments/comments/Comments'
 import LoadingButton from '../../common/loadingButton/LoadingButton'

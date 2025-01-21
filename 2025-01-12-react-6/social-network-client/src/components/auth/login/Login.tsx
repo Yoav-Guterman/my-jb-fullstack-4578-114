@@ -2,13 +2,18 @@ import { useForm } from 'react-hook-form'
 import './Login.css'
 import LoginModel from '../../../models/user/Login'
 import auth from '../../../services/auth'
+import { useContext } from 'react'
+import { AuthContext } from '../auth/Auth'
 
 export default function Login(): JSX.Element {
 
     const { register, handleSubmit } = useForm<LoginModel>()
 
+    const { newLogin } = useContext(AuthContext)!
+
     async function submit(login: LoginModel) {
         const jwt = await auth.login(login)
+        newLogin(jwt)
     }
 
     return (

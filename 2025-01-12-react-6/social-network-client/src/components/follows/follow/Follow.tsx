@@ -1,5 +1,5 @@
 import './Follow.css'
-import followingService from '../../../services/following'
+import followingService from '../../../services/auth-aware/following'
 import User from '../../../models/user/User'
 import profilePicSource from '../../../assets/images/profilePic.jpg'
 import { useState } from 'react'

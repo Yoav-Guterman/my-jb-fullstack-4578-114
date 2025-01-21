@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form'
 import './NewPost.css'
 import PostDraft from '../../../models/post/PostDraft'
-import profileService from '../../../services/profile'
+import profileService from '../../../services/auth-aware/profile'
 import { useState } from 'react'
 import LoadingButton from '../../common/loadingButton/LoadingButton'
 import { useDispatch } from 'react-redux'
