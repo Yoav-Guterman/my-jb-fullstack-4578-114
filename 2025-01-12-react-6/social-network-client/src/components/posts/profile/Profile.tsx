@@ -8,7 +8,7 @@ import { LoadingSize } from '../../../models/loading/loadingSize'
 import { init } from '../../../redux/profileSlice'
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks'
 import useService from '../../../hooks/useService'
-import ProfileService from '../../../services/auth-aware/profile'
+import ProfileService from '../../../services/auth-aware/Profile'
 
 export default function Profile() {
 
@@ -25,7 +25,7 @@ export default function Profile() {
         (async () => {
             try {
                 if (posts.length === 0) {
-                    const postsFromServer = await profile.getProfile()
+                    const postsFromServer = await profileService.getProfile()
                     dispatch(init(postsFromServer))
                 }
             } catch (e) {

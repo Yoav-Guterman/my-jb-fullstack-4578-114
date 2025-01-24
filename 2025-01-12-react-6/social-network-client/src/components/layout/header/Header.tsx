@@ -19,15 +19,16 @@ export default function Header() {
             <div>
                 Logo
             </div>
+
             <div>
                 <nav>
                     <NavLink to="/profile">profile</NavLink>
                     <NavLink to="/feed">feed</NavLink>
                     {/* <NavLink to="/search">search</NavLink> */}
                 </nav>
-                <div>
-                    Hello {name} | <button onClick={logMeOut}>logout</button>
-                </div>
+            </div>
+            <div>
+                Hello {name} | <button onClick={logMeOut}>logout</button>
             </div>
         </div>
     )

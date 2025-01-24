@@ -3,11 +3,13 @@ import Post from "../models/post/Post";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface FeedState {
-    posts: Post[]
+    posts: Post[],
+    isNewContent: boolean
 }
 
 const initialState: FeedState = {
-    posts: []
+    posts: [],
+    isNewContent: false
 }
 
 export const feedSlice = createSlice({
@@ -16,13 +18,17 @@ export const feedSlice = createSlice({
     reducers: {
         init: (state, action: PayloadAction<Post[]>) => {
             state.posts = action.payload
+            state.isNewContent = false
         },
         addComment: (state, action: PayloadAction<Comment>) => {
             state.posts.find(p => p.id === action.payload.postId)?.comments.push(action.payload)
+        },
+        setNewContent: (state, action: PayloadAction<boolean>) => {
+            state.isNewContent = action.payload
         }
     }
 })
 
-export const { init, addComment } = feedSlice.actions
+export const { init, addComment, setNewContent } = feedSlice.actions
 
 export default feedSlice.reducer

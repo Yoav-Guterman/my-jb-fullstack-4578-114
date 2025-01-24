@@ -2,14 +2,18 @@ import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate, useParams } from 'react-router-dom'
 import PostDraft from '../../../models/post/PostDraft'
-import profileService from '../../../services/auth-aware/profile'
+import ProfileService from '../../../services/auth-aware/profile'
 import './EditPosts.css'
 import LoadingButton from '../../common/loadingButton/LoadingButton'
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks'
 import { update } from '../../../redux/profileSlice'
+import useService from '../../../hooks/useService'
+
 
 export default function EditPost(): JSX.Element {
     const [editPostLoading, setEditPostLoading] = useState<boolean>(false)
+
+    const profileService = useService(ProfileService)
 
     const { id } = useParams<'id'>()
     const { handleSubmit, register, formState, reset } = useForm<PostDraft>()

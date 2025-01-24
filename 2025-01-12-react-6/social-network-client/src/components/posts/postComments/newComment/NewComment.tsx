@@ -1,12 +1,13 @@
 import { useForm } from 'react-hook-form'
 import './NewComment.css'
 import CommentDraft from '../../../../models/comment/CommentDraft'
-import commentsService from '../../../../services/comment'
 import { useState } from 'react'
 import LoadingButton from '../../../common/loadingButton/LoadingButton'
 import { useAppDispatch } from '../../../../redux/hooks'
 import { addComment as addCommentProfile } from '../../../../redux/profileSlice'
 import { addComment as addCommentFeed } from '../../../../redux/feedSlice'
+import CommentsService from '../../../../services/auth-aware/Comments'
+import useService from '../../../../hooks/useService'
 
 
 interface NewCommentProps {
@@ -16,6 +17,8 @@ interface NewCommentProps {
 export default function NewComment(props: NewCommentProps): JSX.Element {
 
     const [isLoading, setIsLoading] = useState<boolean>(false)
+
+    const commentsService = useService(CommentsService)
 
     const { postId } = props
     const {

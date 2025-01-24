@@ -1,16 +1,19 @@
 import { useEffect } from 'react'
 import './Followers.css'
-import followersService from '../../../services/followers'
 import Follow from '../follow/Follow'
 import Loading from '../../common/loading/Loading'
 import { LoadingSize } from '../../../models/loading/loadingSize'
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks'
 import { init } from '../../../redux/followersSlice'
+import useService from '../../../hooks/useService'
+import FollowersService from '../../../services/auth-aware/Followers'
 
 export default function Followers() {
 
     const followers = useAppSelector(state => state.followers.followers)
     const dispatch = useAppDispatch()
+
+    const followersService = useService(FollowersService)
 
     useEffect(() => {
         (async () => {

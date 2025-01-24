@@ -3,6 +3,7 @@ import Profile from "../../posts/profile/Profile";
 import Feed from "../../posts/feed/Feed";
 import NotFound from "../not-found/NotFound";
 import EditPost from "../../posts/edit/EditPosts";
+import SignUp from "../../auth/sign-up/SignUp";
 
 export default function Routing(): JSX.Element {
     return (
@@ -10,6 +11,7 @@ export default function Routing(): JSX.Element {
             <Route path="/" element={<Navigate to="/profile" />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/feed" element={<Feed />} />
+            <Route path="/signUp" element={<SignUp />} />
             <Route path="/edit/:id" element={<EditPost />} />
             <Route path="*" element={<NotFound />} />
         </Routes>

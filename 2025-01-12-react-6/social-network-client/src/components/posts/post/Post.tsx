@@ -1,12 +1,13 @@
 import './Post.css'
 import PostModel from '../../../models/post/Post'
-import profileService from '../../../services/auth-aware/profile'
 import { useNavigate } from 'react-router-dom'
 import Comments from '../postComments/comments/Comments'
 import LoadingButton from '../../common/loadingButton/LoadingButton'
-import { useState } from 'react'
-import { remove } from '../../../redux/profileSlice'
-import { useAppDispatch } from '../../../redux/hooks'
+import { useEffect, useState } from 'react'
+import { clearNewPostId, remove } from '../../../redux/profileSlice'
+import { useAppDispatch, useAppSelector } from '../../../redux/hooks'
+import useService from '../../../hooks/useService'
+import ProfileService from '../../../services/auth-aware/Profile'
 
 interface PostProps {
     post: PostModel
@@ -19,9 +20,10 @@ export default function Post(props: PostProps): JSX.Element {
     const navigate = useNavigate()
     const [isLoading, setIsLoading] = useState<boolean>(false)
 
-
+    const profileService = useService(ProfileService)
 
     const dispatch = useAppDispatch()
+    const newPostId = useAppSelector(state => state.profile.newPostId);
 
     async function deleteMe() {
         if (confirm(`are you sure you want to delete "${title}"`))
@@ -40,8 +42,19 @@ export default function Post(props: PostProps): JSX.Element {
         navigate(`/edit/${id}`)
     }
 
+
+    useEffect(() => {
+        if (id === newPostId) {
+            // Clear the newPostId after animation duration
+            const timer = setTimeout(() => {
+                dispatch(clearNewPostId());
+            }, 1000); // Match this with CSS animation duration
+            return () => clearTimeout(timer);
+        }
+    }, [id, newPostId, dispatch]);
+
     return (
-        <div className='Post'>
+        <div className={`Post ${id === newPostId ? 'fade-in' : ''}`}>
             <div>
                 {title}
             </div>

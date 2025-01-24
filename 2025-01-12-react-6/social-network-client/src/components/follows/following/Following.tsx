@@ -6,6 +6,7 @@ import { LoadingSize } from '../../../models/loading/loadingSize'
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks'
 import { init } from '../../../redux/followingSlice'
 import useService from '../../../hooks/useService'
+import FollowingService from '../../../services/auth-aware/following'
 
 export default function Following() {
 
@@ -14,7 +15,7 @@ export default function Following() {
 
     const dispatch = useAppDispatch()
 
-    const followingService = useService()
+    const followingService = useService(FollowingService)
 
     useEffect(() => {
         (async () => {

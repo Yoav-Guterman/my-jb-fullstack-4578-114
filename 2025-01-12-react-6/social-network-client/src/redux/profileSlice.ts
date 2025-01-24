@@ -4,10 +4,12 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface ProfileState {
     posts: Post[]
+    newPostId: string | null;
 }
 
 const initialState: ProfileState = {
-    posts: []
+    posts: [],
+    newPostId: null
 }
 
 export const profileSlice = createSlice({
@@ -16,9 +18,11 @@ export const profileSlice = createSlice({
     reducers: {
         init: (state, action: PayloadAction<Post[]>) => {
             state.posts = action.payload
+            state.newPostId = null
         },
         newPost: (state, action: PayloadAction<Post>) => {
             state.posts = [action.payload, ...state.posts]
+            state.newPostId = action.payload.id
         },
         remove: (state, action: PayloadAction<{ id: string }>) => {
             state.posts = state.posts.filter(p => p.id !== action.payload.id)
@@ -32,9 +36,12 @@ export const profileSlice = createSlice({
         addComment: (state, action: PayloadAction<Comment>) => {
             state.posts.find(p => p.id === action.payload.postId)?.comments.push(action.payload)
         },
+        clearNewPostId: (state) => {
+            state.newPostId = null;
+        },
     }
 })
 
-export const { init, newPost, remove, update, addComment } = profileSlice.actions
+export const { init, newPost, remove, update, addComment, clearNewPostId } = profileSlice.actions
 
 export default profileSlice.reducer

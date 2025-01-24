@@ -1,11 +1,13 @@
 import './Follow.css'
-import followingService from '../../../services/auth-aware/following'
 import User from '../../../models/user/User'
 import profilePicSource from '../../../assets/images/profilePic.jpg'
 import { useState } from 'react'
 import LoadingButton from '../../common/loadingButton/LoadingButton'
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks'
 import { unfollow as unfollowAction, follow as followAction } from '../../../redux/followingSlice'
+import FollowingService from '../../../services/auth-aware/following'
+import useService from '../../../hooks/useService'
+import { setNewContent } from '../../../redux/feedSlice'
 
 interface FollowProps {
     user: User
@@ -18,6 +20,7 @@ export default function Follow(props: FollowProps): JSX.Element {
     const dispatch = useAppDispatch()
     const isFollowing = useAppSelector(state => state.following.following.findIndex(f => f.id === id) > -1)
 
+    const followingService = useService(FollowingService)
 
     async function unfollow() {
         if (confirm(`are you sure you want to unfollow ${name}`))
@@ -25,6 +28,7 @@ export default function Follow(props: FollowProps): JSX.Element {
                 setIsLoading(true)
                 await followingService.unfollow(id)
                 dispatch(unfollowAction({ userId: id }))
+                dispatch(setNewContent(true))
             } catch (e) {
                 console.log(e)
             } finally {
@@ -37,6 +41,7 @@ export default function Follow(props: FollowProps): JSX.Element {
             setIsLoading(true)
             await followingService.follow(id)
             dispatch(followAction(props.user))
+            dispatch(setNewContent(true))
         } catch (e) {
             console.log(e)
         } finally {
