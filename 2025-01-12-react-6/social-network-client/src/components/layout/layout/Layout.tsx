@@ -6,42 +6,36 @@ import Header from '../header/Header'
 import Routing from '../routing/Routing'
 import './Layout.css'
 import { AuthContext } from '../../auth/auth/Auth'
-import AuthRouting from '../../auth/authRouting/authRouting'
 
 export default function Layout() {
-
     const { jwt } = useContext(AuthContext)!
-
-    const isLoggedIn: boolean = !!jwt
+    const isLoggedIn = !!jwt
 
     return (
-
         <div className='Layout'>
-
-            {isLoggedIn && <>
-                <header>
-                    <Header />
-                </header>
-                <aside className='aside1'>
-                    <Following />
-                </aside>
-                <aside className='aside2'>
-                    <Followers />
-                </aside>
-                <main>
+            {isLoggedIn ? (
+                <>
+                    <header>
+                        <Header />
+                    </header>
+                    <aside className='aside1'>
+                        <Following />
+                    </aside>
+                    <aside className='aside2'>
+                        <Followers />
+                    </aside>
+                    <main>
+                        <Routing />
+                    </main>
+                    <footer>
+                        <Footer />
+                    </footer>
+                </>
+            ) : (
+                <div className="auth-main">
                     <Routing />
-                </main>
-                <footer>
-                    <Footer />
-                </footer>
-            </>}
-
-
-            {!isLoggedIn &&
-                <main className="auth-main">
-                    <AuthRouting />
-                </main>
-            }
+                </div>
+            )}
         </div>
     )
 }

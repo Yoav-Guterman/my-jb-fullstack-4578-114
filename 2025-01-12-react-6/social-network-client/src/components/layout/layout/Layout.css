@@ -47,7 +47,13 @@
     border-radius: 20px;
 }
 
-.Layout>main {
+.Layout main {
+    grid-column: 2 / span 1;
+    grid-row: 2 / span 2;
+    padding: 10px;
+}
+
+.Layout .auth-main {
     grid-column: 1 / span 2;
     grid-row: 1 / span 4;
     padding: 10px;

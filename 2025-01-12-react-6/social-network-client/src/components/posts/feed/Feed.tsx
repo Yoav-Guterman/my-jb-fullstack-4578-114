@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import './Feed.css'
 import Post from '../post/Post'
 import useTitle from '../../../hooks/useTitle'
@@ -6,31 +6,35 @@ import Loading from '../../common/loading/Loading'
 import { LoadingSize } from '../../../models/loading/loadingSize'
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks'
 import { init, setNewContent } from '../../../redux/feedSlice'
-import FeedService from '../../../services/auth-aware/feed'
+import FeedService from '../../../services/auth-aware/Feed'
 import useService from '../../../hooks/useService'
 
 export default function Feed() {
 
-    const posts = useAppSelector(state => state.feed.posts)
+    const { posts, isNewContent, isInitialized } = useAppSelector(state => state.feed)
     const dispatch = useAppDispatch()
-
+    const [isLoading, setIsLoading] = useState<boolean>(true)
     const feedService = useService(FeedService)
-
 
     useTitle('SN- Feed')
 
+
     useEffect(() => {
-        (async () => {
-            try {
-                if (posts.length === 0) {
+        const fetchPosts = async () => {
+            // Only fetch if we haven't initialized the data yet
+            if (isInitialized === false) {
+                try {
                     const postsFromServer = await feedService.getFeed()
                     dispatch(init(postsFromServer))
+                } catch (e) {
+                    console.error('Error fetching posts:', e)
                 }
-            } catch (e) {
-                alert(e)
             }
-        })()
-    }, [])
+            setIsLoading(false)
+        }
+
+        fetchPosts()
+    }, [isInitialized, dispatch, feedService])
 
     async function reload() {
         try {
@@ -45,15 +49,22 @@ export default function Feed() {
         dispatch(setNewContent(false))
     }
 
-    const isNewContent = useAppSelector(state => state.feed.isNewContent)
+
+    if (isLoading) {
+        return (
+            <div className='Profile-loading'>
+                <Loading size={LoadingSize.LARGE} />
+            </div>
+        )
+    }
 
     return (
         <div className='Feed'>
 
             {posts.length === 0 &&
-                <div className='feed-loading'>
-                    <Loading size={LoadingSize.LARGE} />
-
+                <div className='postsEmpty'>
+                    you have no posts in your feed. <br />
+                    follow people so you can see their posts
                 </div>}
 
             {posts.length > 0 && <>

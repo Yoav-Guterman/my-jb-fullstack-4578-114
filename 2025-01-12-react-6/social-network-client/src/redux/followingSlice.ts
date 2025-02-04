@@ -2,11 +2,13 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import User from "../models/user/User";
 
 interface FollowingState {
-    following: User[]
+    following: User[],
+    isInitialized: boolean
 }
 
 const initialState: FollowingState = {
-    following: []
+    following: [],
+    isInitialized: false
 }
 
 export const followingSlice = createSlice({
@@ -21,10 +23,13 @@ export const followingSlice = createSlice({
         },
         follow: (state, action: PayloadAction<User>) => {
             state.following.push(action.payload)
+        },
+        clearFollowingInitialized: (state) => {
+            state.isInitialized = false
         }
     }
 })
 
-export const { init, unfollow, follow } = followingSlice.actions
+export const { init, unfollow, follow, clearFollowingInitialized } = followingSlice.actions
 
 export default followingSlice.reducer

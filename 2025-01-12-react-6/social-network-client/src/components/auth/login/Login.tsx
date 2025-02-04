@@ -2,22 +2,31 @@ import { useForm } from 'react-hook-form'
 import './Login.css'
 import LoginModel from '../../../models/user/Login'
 import auth from '../../../services/auth'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { AuthContext } from '../auth/Auth'
 import { useNavigate } from 'react-router-dom'
+import LoadingButton from '../../common/loadingButton/LoadingButton'
 
 export default function Login(): JSX.Element {
 
+    const [isLoading, setIsLoading] = useState<boolean>(false)
     const { register, handleSubmit } = useForm<LoginModel>()
 
     const navigate = useNavigate()
     const { newLogin } = useContext(AuthContext)!
 
     async function submit(login: LoginModel) {
-        const jwt = await auth.login(login)
-        newLogin(jwt)
-    }
+        try {
+            setIsLoading(true)
+            const jwt = await auth.login(login)
+            newLogin(jwt)
+        } catch (e) {
+            console.log(e)
+        } finally {
+            setIsLoading(false)
+        }
 
+    }
     function goToSignUp() {
         navigate('/signUp')
     }
@@ -40,7 +49,9 @@ export default function Login(): JSX.Element {
                     <div className="mb-3">
                         <input className="form-control" placeholder='password' type='password' {...register('password')} />
                     </div>
-                    <button type="submit" className="btn btn-primary">Login</button>
+                    {isLoading ? <LoadingButton message={'Logging in'} /> :
+                        <button type="submit" className="btn btn-primary">Login</button>
+                    }
                 </form>
                 <h6>don't have an account? sign in here</h6>
                 <button

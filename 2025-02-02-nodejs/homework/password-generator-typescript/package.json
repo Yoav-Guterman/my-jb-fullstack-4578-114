@@ -1,0 +1,21 @@
+{
+  "name": "password-generator-typescript-yoav",
+  "version": "1.1.0",
+  "main": "dist/passwordGenerator.js",
+  "types": "dist/passwordGenerator.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "typescript": "^5.7.3"
+  }
+}

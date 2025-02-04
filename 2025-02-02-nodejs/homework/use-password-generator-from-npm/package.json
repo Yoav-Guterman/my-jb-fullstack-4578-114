@@ -1,0 +1,19 @@
+{
+  "name": "use-password-generator-from-npm",
+  "version": "1.0.0",
+  "main": "dist/app.js",
+  "types": "dist/app.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "password-generator-typescript-yoav": "^1.0.0"
+  }
+}
