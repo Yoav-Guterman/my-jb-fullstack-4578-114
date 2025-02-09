@@ -5,13 +5,13 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface FeedState {
     posts: Post[],
     isNewContent: boolean
-    isInitialized: boolean
+    isLoading: boolean
 }
 
 const initialState: FeedState = {
     posts: [],
     isNewContent: false,
-    isInitialized: false
+    isLoading: true
 }
 
 export const feedSlice = createSlice({
@@ -21,7 +21,7 @@ export const feedSlice = createSlice({
         init: (state, action: PayloadAction<Post[]>) => {
             state.posts = action.payload
             state.isNewContent = false
-            state.isInitialized = true
+            state.isLoading = false
 
         },
         addComment: (state, action: PayloadAction<Comment>) => {
@@ -30,12 +30,12 @@ export const feedSlice = createSlice({
         setNewContent: (state, action: PayloadAction<boolean>) => {
             state.isNewContent = action.payload
         },
-        clearFeedInitialized: (state) => {
-            state.isInitialized = false
+        resetFeedLoad: (state) => {
+            state.isLoading = true
         }
     }
 })
 
-export const { init, addComment, setNewContent, clearFeedInitialized } = feedSlice.actions
+export const { init, addComment, setNewContent, resetFeedLoad } = feedSlice.actions
 
 export default feedSlice.reducer

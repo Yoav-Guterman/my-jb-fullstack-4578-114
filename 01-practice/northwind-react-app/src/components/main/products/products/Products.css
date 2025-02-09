@@ -1,0 +1,17 @@
+.Products {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    height: 100%;
+}
+
+.Products>* {
+    border: 1px dashed lightcoral;
+}
+
+.Products>.CategoryContainer {
+    grid-column: 1;
+}
+
+.Products>.productContainer {
+    grid-column: 2;
+}

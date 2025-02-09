@@ -1,0 +1,10 @@
+{
+    "app": {
+        "name": "APP_NAME",
+        "port": "PORT",
+        "sequelizeLogging": "SHOW_LOGGING"
+    },
+    "db": {
+        "password": "DB_PASSWORD"
+    }
+}

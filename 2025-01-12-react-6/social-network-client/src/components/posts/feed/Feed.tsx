@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import './Feed.css'
 import Post from '../post/Post'
 import useTitle from '../../../hooks/useTitle'
@@ -11,18 +11,15 @@ import useService from '../../../hooks/useService'
 
 export default function Feed() {
 
-    const { posts, isNewContent, isInitialized } = useAppSelector(state => state.feed)
+    const { posts, isNewContent, isLoading } = useAppSelector(state => state.feed)
     const dispatch = useAppDispatch()
-    const [isLoading, setIsLoading] = useState<boolean>(true)
     const feedService = useService(FeedService)
 
     useTitle('SN- Feed')
 
-
     useEffect(() => {
-        const fetchPosts = async () => {
-            // Only fetch if we haven't initialized the data yet
-            if (isInitialized === false) {
+        (async () => {
+            if (isLoading) {
                 try {
                     const postsFromServer = await feedService.getFeed()
                     dispatch(init(postsFromServer))
@@ -30,12 +27,10 @@ export default function Feed() {
                     console.error('Error fetching posts:', e)
                 }
             }
-            setIsLoading(false)
-        }
+        })()
+    }, [])
 
-        fetchPosts()
-    }, [isInitialized, dispatch, feedService])
-
+    // fix the DRY
     async function reload() {
         try {
             const postsFromServer = await feedService.getFeed()
@@ -49,25 +44,18 @@ export default function Feed() {
         dispatch(setNewContent(false))
     }
 
-
-    if (isLoading) {
-        return (
-            <div className='Profile-loading'>
-                <Loading size={LoadingSize.LARGE} />
-            </div>
-        )
-    }
-
     return (
         <div className='Feed'>
 
-            {posts.length === 0 &&
-                <div className='postsEmpty'>
+            {isLoading && <Loading size={LoadingSize.LARGE} />}
+
+            {!isLoading && posts.length === 0 &&
+                <div className='EmptyPosts'>
                     you have no posts in your feed. <br />
                     follow people so you can see their posts
                 </div>}
 
-            {posts.length > 0 && <>
+            {!isLoading && posts.length > 0 && <>
 
                 {isNewContent &&
                     <><div className='info'>you have new content, do you want to refresh?

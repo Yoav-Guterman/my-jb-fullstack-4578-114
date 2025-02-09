@@ -1,5 +1,5 @@
 // Profile.tsx
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import './Profile.css'
 import Post from '../post/Post'
 import NewPost from '../new/NewPost'
@@ -15,16 +15,13 @@ export default function Profile() {
     useTitle('SN- Profile')
 
     // Get both posts and initialization status from Redux
-    const { posts, isInitialized } = useAppSelector(state => state.profile)
-    const [isLoading, setIsLoading] = useState(true)
-
+    const { posts, isLoading } = useAppSelector(state => state.profile)
     const profileService = useService(ProfileService)
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        const fetchPosts = async () => {
-            // Only fetch if we haven't initialized the data yet
-            if (isInitialized === false) {
+        (async () => {
+            if (isLoading) {
                 try {
                     const postsFromServer = await profileService.getProfile()
                     dispatch(init(postsFromServer))
@@ -32,38 +29,32 @@ export default function Profile() {
                     console.error('Error fetching posts:', e)
                 }
             }
-            setIsLoading(false)
-        }
-
-        fetchPosts()
-    }, [isInitialized, dispatch, profileService])
-
-    // Early return for loading state
-    if (isLoading) {
-        return (
-            <div className='Profile-loading'>
-                <Loading size={LoadingSize.LARGE} />
-            </div>
-        )
-    }
+        })()
+    }, [])
 
     return (
         <div className='Profile'>
-            <NewPost />
-            {posts.length === 0 ? (
-                <div className='postsEmpty'>
-                    you have no posts uploaded yet. <br />
-                    press Add Post to create your first post
-                </div>
-            ) : (
-                posts.map(p => (
-                    <Post
-                        key={p.id}
-                        post={p}
-                        isAllowActions={true}
-                    />
-                ))
-            )}
+
+            {isLoading && <Loading size={LoadingSize.LARGE} />}
+
+            {!isLoading && posts.length === 0 &&
+                <> <NewPost />
+                    <p>you don't have Posts yet!</p>
+                </>}
+
+            {!isLoading && posts.length > 0 &&
+                <>
+                    <NewPost />
+                    {posts.map(p => (
+                        <Post
+                            key={p.id}
+                            post={p}
+                            isAllowActions={true}
+                        />
+                    ))}
+                </>
+            }
+
         </div>
     )
 }

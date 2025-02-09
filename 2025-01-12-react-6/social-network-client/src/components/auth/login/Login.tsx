@@ -6,6 +6,8 @@ import { useContext, useState } from 'react'
 import { AuthContext } from '../auth/Auth'
 import { useNavigate } from 'react-router-dom'
 import LoadingButton from '../../common/loadingButton/LoadingButton'
+import { AxiosError } from 'axios'
+
 
 export default function Login(): JSX.Element {
 
@@ -21,6 +23,9 @@ export default function Login(): JSX.Element {
             const jwt = await auth.login(login)
             newLogin(jwt)
         } catch (e) {
+            if (e instanceof AxiosError) {
+                console.log('error:', e.response?.data)
+            }
             console.log(e)
         } finally {
             setIsLoading(false)

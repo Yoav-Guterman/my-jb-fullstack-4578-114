@@ -1,8 +1,10 @@
 import { createContext, PropsWithChildren, useState } from 'react'
 import './Auth.css'
 import { useAppDispatch } from '../../../redux/hooks'
-import { clearProfileInitialized } from '../../../redux/profileSlice'
-import { clearFeedInitialized } from '../../../redux/feedSlice'
+import { resetFeedLoad } from '../../../redux/feedSlice'
+import { resetProfileReload } from '../../../redux/profileSlice'
+import { resetFollowingLoad } from '../../../redux/followingSlice'
+import { resetFollowersLoad } from '../../../redux/followersSlice'
 interface AuthContextInterface {
     jwt: string,
     newLogin(jwt: string): void
@@ -21,19 +23,25 @@ export default function Auth(props: PropsWithChildren): JSX.Element {
 
     const { children } = props
 
+    function resetLoading() {
+        dispatch(resetProfileReload())
+        dispatch(resetFeedLoad())
+        dispatch(resetFollowingLoad())
+        dispatch(resetFollowersLoad())
+    }
+
     function newLogin(jwt: string) {
         setJwt(jwt)
         localStorage.setItem(JWT_KEY_NAME, jwt)
-        dispatch(clearProfileInitialized())
-        dispatch(clearFeedInitialized())
+        resetLoading()
     }
+
+    // make it into one function to prevent DRY
 
     function logOut() {
         localStorage.removeItem(JWT_KEY_NAME)
         setJwt('')
-        dispatch(clearProfileInitialized())
-        dispatch(clearFeedInitialized())
-
+        resetLoading()
     }
 
     return (

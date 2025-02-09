@@ -1,4 +1,4 @@
-import { useEffect, useState, } from 'react'
+import { useEffect } from 'react'
 import './Following.css'
 import Follow from '../follow/Follow'
 import Loading from '../../common/loading/Loading'
@@ -10,33 +10,22 @@ import FollowingService from '../../../services/auth-aware/following'
 
 export default function Following() {
 
-    const { following, isInitialized } = useAppSelector(state => state.following)
-    const [isLoading, setIsLoading] = useState<boolean>(true)
+    const { following, isLoading } = useAppSelector(state => state.following)
     const dispatch = useAppDispatch()
     const followingService = useService(FollowingService)
 
     useEffect(() => {
         (async () => {
-            if (isInitialized === false) {
+            if (isLoading) {
                 try {
-                    const following = await followingService.getUsers()
-                    dispatch(init(following))
+                    const followingFromServer = await followingService.getUsers()
+                    dispatch(init(followingFromServer))
                 } catch (e) {
                     console.log(e)
                 }
-                setIsLoading(false)
             }
         })()
-    }, [isInitialized, dispatch, followingService])
-
-    if (isLoading) {
-        return (
-            <div className='following-loading'>
-                {/* need to complete that */}
-                <Loading size={LoadingSize.MEDIUM} />
-            </div>
-        )
-    }
+    }, [])
 
     return (
         <div className='Following'>
@@ -45,13 +34,16 @@ export default function Following() {
             </div>
             <div className='im-following'>
 
-                {following.length === 0 && <>
+                {isLoading && <Loading size={LoadingSize.MEDIUM} />}
+
+
+                {!isLoading && following.length === 0 && <>
                     <div className='emptyFollowing'>
                         you have no following
                     </div>
                 </>}
 
-                {following.length > 0 && <>
+                {!isLoading && following.length > 0 && <>
                     {following.map(follow => <Follow
                         key={follow.username}
                         user={follow}

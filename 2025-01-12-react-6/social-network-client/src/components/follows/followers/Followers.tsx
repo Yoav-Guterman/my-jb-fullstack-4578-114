@@ -10,7 +10,7 @@ import FollowersService from '../../../services/auth-aware/Followers'
 
 export default function Followers() {
 
-    const followers = useAppSelector(state => state.followers.followers)
+    const { followers, isLoading } = useAppSelector(state => state.followers)
     const dispatch = useAppDispatch()
 
     const followersService = useService(FollowersService)
@@ -18,9 +18,9 @@ export default function Followers() {
     useEffect(() => {
         (async () => {
             try {
-                if (followers.length === 0) {
-                    const followers = await followersService.getUsers()
-                    dispatch(init(followers))
+                if (isLoading) {
+                    const followersFromServer = await followersService.getUsers()
+                    dispatch(init(followersFromServer))
                 }
             } catch (e) {
                 console.log(e)
@@ -35,10 +35,16 @@ export default function Followers() {
             </div>
             <div className='my-followers'>
 
-                {followers.length === 0 && <Loading size={LoadingSize.MEDIUM} />}
+                {isLoading && <Loading size={LoadingSize.MEDIUM} />}
+
+                {!isLoading && followers.length === 0 &&
+                    <div className='noFollowers'>
+                        your have no followers!
+                    </div>
+                }
 
 
-                {followers.length > 0 && <>
+                {!isLoading && followers.length > 0 && <>
                     {followers.map(follow => <Follow
                         key={follow.username}
                         user={follow}

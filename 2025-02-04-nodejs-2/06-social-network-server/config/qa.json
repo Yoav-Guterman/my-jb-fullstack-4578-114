@@ -1,0 +1,7 @@
+{
+    "app": {
+        "port": "3005",
+        "name": "twitter qa",
+        "sequelizeLogging": false
+    }
+}
