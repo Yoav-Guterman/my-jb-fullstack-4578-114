@@ -6,6 +6,9 @@ import errorLogger from "./middlewares/error/error-logger"
 import errorResponder from "./middlewares/error/error-responder"
 import notFound from "./middlewares/not-found"
 import followsRouter from "./routers/follows"
+import commentsRouter from "./routers/comments"
+import feedRouter from "./routers/feed"
+import authRouter from "./routers/auth"
 
 const port = config.get<string>('app.port')
 const name = config.get<string>('app.name')
@@ -20,6 +23,10 @@ const app = express();
     app.use(json()) // a middleware to extract the post data and save it to the request object in case the content type of the request is application/json
     app.use('/profile', profileRouter)
     app.use('/follows', followsRouter)
+    app.use('/comments', commentsRouter)
+    app.use('/feed', feedRouter)
+    app.use('/auth', authRouter)
+
 
     // special notFound middleware
     app.use(notFound)
