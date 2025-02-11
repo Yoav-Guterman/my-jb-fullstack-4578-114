@@ -1,0 +1,56 @@
+import { NextFunction, Request, Response } from "express";
+import User from "../../models/user";
+import Follow from "../../models/follow";
+
+export async function getFollowers(req: Request, res: Response, next: NextFunction) {
+    try {
+        const userId = '1230ae30-dc4f-4752-bd84-092956f5c633';
+
+        const user = await User.findByPk(userId, {
+            include: [{
+                model: User,
+                as: 'followers'
+            }]
+        })
+
+        res.json(user.followers)
+    } catch (e) {
+        next(e)
+    }
+}
+
+export async function getFollowing(req: Request, res: Response, next: NextFunction) {
+    try {
+        // In a real app, you'd get this from authentication
+        const userId = '1230ae30-dc4f-4752-bd84-092956f5c633';
+
+        const user = await User.findByPk(userId, {
+            include: [{
+                model: User,
+                as: 'following',  // This matches the alias in the User model
+            }]
+        });
+
+        res.json(user);
+    } catch (e) {
+        next(e);
+    }
+}
+
+export async function follow(req: Request<{ id: string }>, res: Response, next: NextFunction) {
+    try {
+        const userId = '1230ae30-dc4f-4752-bd84-092956f5c633';
+        const followeeId = '034485be-cfd2-48a7-b80d-f54773eab18c'
+
+        // need to find the person id so i can add him to follow id with the already user id as following, and the new person as followed
+        const follow = await Follow.create({
+            followerId: userId,
+            followeeId: req.params.id
+        })
+
+        res.json(follow)
+    } catch (e) {
+        next(e)
+    }
+}
+

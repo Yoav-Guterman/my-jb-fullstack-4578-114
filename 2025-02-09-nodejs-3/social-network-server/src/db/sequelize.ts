@@ -3,15 +3,15 @@ import User from "../models/user";
 import config from 'config'
 import Post from "../models/post";
 import Comment from "../models/comment";
-import Follows from "../models/follows";
+import Follow from "../models/follow";
 
-const isLogging = config.get<boolean>('app.sequelizeLogging')
+const logging = config.get<boolean>('sequelize.logging') ? console.log : false
 
 const sequelize = new Sequelize({
-    models: [User, Post, Comment, Follows],
-    logging: isLogging ? console.log : false,
+    models: [User, Post, Comment, Follow],
     dialect: 'mysql',
-    ...config.get('db')
+    ...config.get('db'),
+    logging,
 })
 
 export default sequelize
