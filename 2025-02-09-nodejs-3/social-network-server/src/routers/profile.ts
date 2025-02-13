@@ -6,8 +6,8 @@ import { newPostValidator, updatePostValidator } from "../controllers/profile/va
 const profileRouter = Router()
 
 profileRouter.get('/', getProfile)
-profileRouter.get('/id:', getPost)
-profileRouter.delete('/id:', deletePost)
+profileRouter.get('/:id', getPost)
+profileRouter.delete('/:id', deletePost)
 profileRouter.post('/', validation(newPostValidator), createPost)
 profileRouter.patch('/:id', validation(updatePostValidator), updatePost)
 

@@ -5,7 +5,7 @@ import { useState } from 'react'
 import LoadingButton from '../../common/loadingButton/LoadingButton'
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks'
 import { unfollow as unfollowAction, follow as followAction } from '../../../redux/followingSlice'
-import FollowingService from '../../../services/auth-aware/following'
+import FollowingService from '../../../services/auth-aware/Following'
 import useService from '../../../hooks/useService'
 import { setNewContent } from '../../../redux/feedSlice'
 

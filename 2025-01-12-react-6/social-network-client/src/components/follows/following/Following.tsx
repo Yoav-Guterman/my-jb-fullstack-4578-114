@@ -6,7 +6,7 @@ import { LoadingSize } from '../../../models/loading/loadingSize'
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks'
 import { init } from '../../../redux/followingSlice'
 import useService from '../../../hooks/useService'
-import FollowingService from '../../../services/auth-aware/following'
+import FollowingService from '../../../services/auth-aware/Following'
 
 export default function Following() {
 

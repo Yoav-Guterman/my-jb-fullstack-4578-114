@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import User from "../../models/user";
+import { StatusCodes } from "http-status-codes";
 import { createHmac } from "crypto";
 import config from 'config'
 import { sign } from "jsonwebtoken";
@@ -21,10 +22,11 @@ export async function login(req: Request<{}, {}, { username: string, password: s
             },
         })
 
-        if (!user) return next({
-            status: 401,
-            message: 'wrong credentials'
-        })
+        if (!user) return next(
+            new TwitterError(
+                StatusCodes.UNAUTHORIZED,
+                'wrong credentials'
+            ))
 
         const jwt = sign(user.get({ plain: true }), config.get<string>('app.jwtSecret'))
         res.json({ jwt })

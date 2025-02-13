@@ -1,5 +1,7 @@
 import { NextFunction, Request, Response } from "express";
+import { StatusCodes } from "http-status-codes";
 import { ObjectSchema } from "joi";
+import TwitterError from "../errors/twitter-error";
 
 export default function validation(validator: ObjectSchema) {
     return async function (req: Request, res: Response, next: NextFunction) {
@@ -7,10 +9,10 @@ export default function validation(validator: ObjectSchema) {
             req.body = await validator.validateAsync(req.body)
             next()
         } catch (e) {
-            next({
-                status: 422, // 422 http code for Unprocessable Entity
-                message: e.message
-            })
+            next(new TwitterError(
+                StatusCodes.UNPROCESSABLE_ENTITY, // 422 http code for Unprocessable Entity
+                e.message
+            ))
         }
     }
 }

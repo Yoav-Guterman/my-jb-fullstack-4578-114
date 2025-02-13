@@ -4,7 +4,7 @@ import './App.css'
 import { Provider } from "react-redux";
 import store from "../../redux/store";
 import Auth from "../auth/auth/Auth";
-import { ToastContainer } from "react-toastify";
+// import { ToastContainer } from "react-toastify";
 // continue it
 export default function App(): JSX.Element {
   return (
