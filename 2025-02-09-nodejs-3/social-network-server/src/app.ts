@@ -9,6 +9,7 @@ import followsRouter from "./routers/follows"
 import commentsRouter from "./routers/comments"
 import feedRouter from "./routers/feed"
 import authRouter from "./routers/auth"
+import { extractUserFromToken, requireAuth } from "./middlewares/auth/auth.middleware"
 
 const port = config.get<string>('app.port')
 const name = config.get<string>('app.name')
@@ -19,13 +20,22 @@ const app = express();
 (async () => {
     await sequelize.sync({ force })
 
-    // middlewares
+    // basic middleware
     app.use(json()) // a middleware to extract the post data and save it to the request object in case the content type of the request is application/json
-    app.use('/profile', profileRouter)
-    app.use('/follows', followsRouter)
-    app.use('/comments', commentsRouter)
-    app.use('/feed', feedRouter)
-    app.use('/auth', authRouter)
+
+    // Apply token extraction to ALL routes
+    // This middleware will try to get the user from JWT if present
+    app.use(extractUserFromToken);
+
+    // public routes (no auth required)
+    app.use('/auth', authRouter);  // Login/signup don't need authentication
+
+
+    // protected routes - apply requireAuth
+    app.use('/profile', requireAuth, profileRouter)
+    app.use('/follows', requireAuth, followsRouter)
+    app.use('/comments', requireAuth, commentsRouter)
+    app.use('/feed', requireAuth, feedRouter)
 
 
     // special notFound middleware
@@ -38,7 +48,3 @@ const app = express();
 
     app.listen(port, () => console.log(`${name} started on port ${port}...`))
 })()
-
-
-
-

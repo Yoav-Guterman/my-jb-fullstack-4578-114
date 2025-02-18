@@ -7,9 +7,8 @@ import TwitterError from "../../errors/twitter-error";
 
 export async function getProfile(req: Request, res: Response, next: NextFunction) {
     try {
-        const userId = '1230ae30-dc4f-4752-bd84-092956f5c633'
 
-        const user = await User.findByPk(userId, {
+        const user = await User.findByPk(req.userId, {
             include: [{
                 model: Post,
                 ...postIncludes
@@ -23,7 +22,6 @@ export async function getProfile(req: Request, res: Response, next: NextFunction
                 'user profile not found'
             )
         }
-
     } catch (e) {
         next(e)
     }
@@ -68,7 +66,7 @@ export async function deletePost(req: Request<{ id: string }>, res: Response, ne
 
 export async function createPost(req: Request, res: Response, next: NextFunction) {
     try {
-        const userId = '1230ae30-dc4f-4752-bd84-092956f5c633'
+        const userId = req.userId
 
         const post = await Post.create({ ...req.body, userId })
         await post.reload(postIncludes)
@@ -80,14 +78,7 @@ export async function createPost(req: Request, res: Response, next: NextFunction
 
 export async function updatePost(req: Request<{ id: string }>, res: Response, next: NextFunction) {
     try {
-        const post = await Post.findByPk(req.params.id, postIncludes)
-
-        if (!post) {
-            throw new TwitterError(
-                StatusCodes.NOT_FOUND,
-                'Post not found'
-            );
-        }
+        const post = req.post
 
         const { title, body } = req.body
 

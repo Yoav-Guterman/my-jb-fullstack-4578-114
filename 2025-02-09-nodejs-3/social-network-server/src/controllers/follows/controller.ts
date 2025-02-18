@@ -7,7 +7,7 @@ import { StatusCodes } from "http-status-codes";
 
 export async function getFollowers(req: Request, res: Response, next: NextFunction) {
     try {
-        const userId = '1230ae30-dc4f-4752-bd84-092956f5c633';
+        const userId = req.userId
 
         const user = await User.findByPk(userId, {
             include: [{
@@ -26,7 +26,7 @@ export async function getFollowers(req: Request, res: Response, next: NextFuncti
 export async function getFollowing(req: Request, res: Response, next: NextFunction) {
     try {
         // In a real app, you'd get this from authentication
-        const userId = '1230ae30-dc4f-4752-bd84-092956f5c633';
+        const userId = req.userId
 
         const user = await User.findByPk(userId, {
             include: [{
@@ -43,8 +43,7 @@ export async function getFollowing(req: Request, res: Response, next: NextFuncti
 
 export async function follow(req: Request<{ id: string }>, res: Response, next: NextFunction) {
     try {
-        const userId = '1230ae30-dc4f-4752-bd84-092956f5c633';
-
+        const userId = req.userId
         // need to find the person id so i can add him to follow id with the already user id as following, and the new person as followed
         const follow = await Follow.create({
             followerId: userId,
@@ -59,7 +58,7 @@ export async function follow(req: Request<{ id: string }>, res: Response, next: 
 
 export async function unfollow(req: Request<{ id: string }>, res: Response, next: NextFunction) {
     try {
-        const userId = '1230ae30-dc4f-4752-bd84-092956f5c633';
+        const userId = req.userId
 
         // need to find the person id so i can add him to follow id with the already user id as following, and the new person as followed
         const isUnfollowed = await Follow.destroy({
@@ -73,7 +72,6 @@ export async function unfollow(req: Request<{ id: string }>, res: Response, next
                 StatusCodes.NOT_FOUND,
                 'tried to unfollow unexisting user'
             )
-
         )
 
         res.json({ success: true })

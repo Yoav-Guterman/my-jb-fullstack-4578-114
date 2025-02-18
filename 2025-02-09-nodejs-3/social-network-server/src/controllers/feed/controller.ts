@@ -5,7 +5,7 @@ import postIncludes from "../common/post-includes";
 
 export async function getFeed(req: Request, res: Response, next: NextFunction) {
     try {
-        const userId = '1230ae30-dc4f-4752-bd84-092956f5c633';
+        const userId = req.userId
 
         const user = await User.findByPk(userId, {
             include: [{
