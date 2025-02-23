@@ -1,0 +1,12 @@
+.feed-loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 500px;
+    /* Adjust this value based on your needs */
+}
+
+.Feed .info {
+    background-color: purple;
+    color: white;
+}

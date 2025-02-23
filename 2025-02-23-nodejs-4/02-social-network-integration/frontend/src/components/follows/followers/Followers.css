@@ -1,0 +1,16 @@
+.Followers .my-followers {
+    overflow-y: auto;
+    display: flex;
+    flex-wrap: wrap;
+    height: 200px;
+}
+
+.Followers .followers-title {
+    text-align: center;
+    border-bottom: 1px solid green;
+    color: green;
+}
+
+.Followers {
+    padding: 0px
+}

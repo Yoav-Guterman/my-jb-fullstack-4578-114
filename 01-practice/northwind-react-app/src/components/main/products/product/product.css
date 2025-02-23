@@ -1,0 +1,51 @@
+.Product {
+    /* Card styling for each product */
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 15px;
+    background-color: white;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Add hover effect for better interactivity */
+.Product:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.productPicture {
+    /* Container for the product image */
+    width: 100%;
+    aspect-ratio: 1;
+    /* Makes it square */
+    overflow: hidden;
+    border-radius: 4px;
+}
+
+.productPicture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Ensures images cover the area without distortion */
+}
+
+.productName {
+    /* Product name styling */
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #333;
+    margin: 10px 0;
+}
+
+.price {
+    /* Price styling */
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #2c5282;
+    /* A nice blue shade */
+    margin-top: auto;
+    /* Pushes price to bottom of card */
+}

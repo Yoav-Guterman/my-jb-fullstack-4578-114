@@ -6,6 +6,7 @@
 
 .Layout>* {
     border: 1px dashed lightcoral;
+    overflow: auto;
 }
 
 .Layout>header {

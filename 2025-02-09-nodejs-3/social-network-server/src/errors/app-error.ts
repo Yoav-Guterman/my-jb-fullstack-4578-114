@@ -1,4 +1,4 @@
-export default class TwitterError extends Error {
+export default class AppError extends Error {
     constructor(public status: number, message: string) {
         super(message)
     }

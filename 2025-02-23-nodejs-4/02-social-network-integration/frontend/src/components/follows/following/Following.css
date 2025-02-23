@@ -1,0 +1,12 @@
+.Following .im-following {
+    overflow-y: auto;
+    display: flex;
+    flex-wrap: wrap;
+    height: 200px;
+}
+
+.Following .following-title {
+    text-align: center;
+    border-bottom: 1px solid blue;
+    color: blue;
+}
