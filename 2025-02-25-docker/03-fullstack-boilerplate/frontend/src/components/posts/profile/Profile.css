@@ -1,0 +1,13 @@
+.Profile {
+    display: flex;
+    flex-direction: column;
+    /* Keep any existing styles you have */
+}
+
+.Profile-loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 500px;
+    /* Adjust this value based on your needs */
+}
