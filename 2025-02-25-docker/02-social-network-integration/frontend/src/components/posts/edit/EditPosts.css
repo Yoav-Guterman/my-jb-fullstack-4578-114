@@ -1,0 +1,14 @@
+.EditPost {
+    border: 1px dashed cyan;
+    margin: 4px;
+    padding: 4px;
+}
+
+.EditPost>form {
+    display: flex;
+    flex-direction: column;
+}
+
+.EditPost .error {
+    color: red;
+}
