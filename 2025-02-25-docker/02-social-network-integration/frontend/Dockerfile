@@ -16,14 +16,16 @@
 # packaging a from production:
 
 FROM node:22-alpine as builder
-WORKDIR /app
+WORKDIR /app 
 COPY ./package*.json ./
 RUN npm install
 COPY ./ ./
 RUN npm run build
-FROM nginx:alpine
 
+
+FROM nginx:alpine
 WORKDIR /usr/share/nginx/html
 RUN rm -rf *
 COPY --from=builder /app/dist ./
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 ENTRYPOINT [ "nginx", "-g", "daemon off;" ]
