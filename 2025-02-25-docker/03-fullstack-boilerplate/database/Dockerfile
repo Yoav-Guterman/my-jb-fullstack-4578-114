@@ -1,2 +1,2 @@
 FROM mysql:latest
-COPY ./twitter.sql docker-entrypoint-initdb.d/
+COPY ./init.sql docker-entrypoint-initdb.d/

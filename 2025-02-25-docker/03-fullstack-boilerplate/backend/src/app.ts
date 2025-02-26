@@ -1,7 +1,6 @@
 import express, { json } from "express"
 import config from 'config'
 import sequelize from "./db/sequelize"
-import profileRouter from "./routers/profile"
 import errorLogger from "./middlewares/error/error-logger"
 import errorResponder from "./middlewares/error/error-responder"
 import notFound from "./middlewares/not-found"
@@ -27,7 +26,7 @@ const app = express();
 
     // Apply token extraction to ALL routes
     // This middleware will try to get the user from JWT if present
-    app.use(extractUserFromToken);
+    // app.use(extractUserFromToken);
 
     // public routes (no auth required)
     // if need auth
@@ -35,6 +34,7 @@ const app = express();
 
 
     // protected routes - apply requireAuth
+    // here is the place to mount routers on the app
     // app.use('/profile', requireAuth, profileRouter)
 
 

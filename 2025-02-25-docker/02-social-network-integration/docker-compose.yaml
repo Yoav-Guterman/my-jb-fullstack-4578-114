@@ -22,7 +22,7 @@ services:
     ports:
       - 3000:3000
     environment:
-      - NODE_ENV=docker
+      - NODE_ENV=compose
     build: ./backend
     depends_on:
       database:

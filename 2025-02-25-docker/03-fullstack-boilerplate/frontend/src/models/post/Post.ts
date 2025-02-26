@@ -1,4 +1,3 @@
-import Comment from "../comment/Comment";
 import User from "../user/User";
 import PostDraft from "./PostDraft";
 

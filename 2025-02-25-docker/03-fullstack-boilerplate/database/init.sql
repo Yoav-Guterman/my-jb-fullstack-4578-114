@@ -1,3 +1,3 @@
 -- paste here the export from phpMyAdmin
 -- it should be an .sql file
-.containing "create table" commands etc.
+-- .containing "create table" commands etc.
