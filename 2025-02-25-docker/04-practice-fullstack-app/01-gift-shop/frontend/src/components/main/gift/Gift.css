@@ -1,0 +1,63 @@
+.Gift {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    background-color: white;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.Gift:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.gift-name {
+    font-size: 18px;
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.gift-description {
+    color: #666;
+    flex-grow: 1;
+    margin-bottom: 15px;
+}
+
+.gift-price-container {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.price {
+    font-weight: bold;
+    font-size: 18px;
+    color: #2a2a2a;
+}
+
+.original-price {
+    text-decoration: line-through;
+    color: #999;
+}
+
+.discounted-price {
+    font-weight: bold;
+    font-size: 18px;
+    color: #e53935;
+}
+
+.discount-badge {
+    background-color: #e53935;
+    color: white;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: bold;
+}

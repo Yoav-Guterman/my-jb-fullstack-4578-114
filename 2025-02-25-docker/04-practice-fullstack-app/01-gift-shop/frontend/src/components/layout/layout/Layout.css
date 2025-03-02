@@ -1,0 +1,36 @@
+.Layout {
+    height: 100%;
+    display: grid;
+    grid-template-rows: 1fr 6fr 1fr;
+    min-height: 0;
+    /* Important for nested grids */
+}
+
+.Layout>* {
+    overflow: auto;
+    /* Adds scrollbars when content overflows */
+    min-height: 0;
+    /* Allows content to shrink */
+    min-width: 0;
+    /* Allows content to shrink horizontally */
+
+    /* Optional: adds some spacing inside each area */
+}
+
+.Layout>header {
+    grid-row: 1;
+    padding: 10px;
+    border-bottom: solid black 1px;
+}
+
+
+.Layout main {
+
+    grid-row: 2;
+    padding: 10px;
+}
+
+.Layout>footer {
+    grid-row: 3;
+    border-top: solid black 1px;
+}

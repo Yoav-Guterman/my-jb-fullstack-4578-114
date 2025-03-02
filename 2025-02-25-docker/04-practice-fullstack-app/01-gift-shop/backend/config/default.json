@@ -1,0 +1,21 @@
+{
+    "app": {
+        "port": "3000",
+        "name": "gift_app",
+        "secret": "MySecret",
+        "jwtSecret": "myJwtSecret"
+    },
+    "db": {
+        "host": "localhost",
+        "port": 3306,
+        "username": "root",
+        "password": "",
+        "database": "gift_app"
+    },
+    "sequelize": {
+        "logging": true,
+        "sync": {
+            "force": false
+        }
+    }
+}
