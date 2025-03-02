@@ -11,6 +11,7 @@ import feedRouter from "./routers/feed"
 import authRouter from "./routers/auth"
 import { extractUserFromToken, requireAuth } from "./middlewares/auth/auth.middleware"
 import cors from 'cors'
+import fileUpload from "express-fileupload"
 
 const port = config.get<string>('app.port')
 const name = config.get<string>('app.name')
@@ -28,6 +29,8 @@ const app = express();
     // })) // allow this specific clients
 
     app.use(json()) // a middleware to extract the post data and save it to the request object in case the content type of the request is application/json
+
+    app.use(fileUpload())
 
     // Apply token extraction to ALL routes
     // This middleware will try to get the user from JWT if present
