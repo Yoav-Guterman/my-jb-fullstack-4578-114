@@ -1,5 +1,5 @@
 import { AllowNull, BelongsTo, BelongsToMany, Column, DataType, Default, ForeignKey, HasMany, Index, Model, PrimaryKey, Table } from "sequelize-typescript";
-import Category from "./product copy";
+import Category from "./category";
 
 @Table({
     underscored: true
@@ -32,5 +32,6 @@ export default class Product extends Model {
     @Column(DataType.DECIMAL)
     price: number
 
-    @BelongsTo
+    @BelongsTo(() => Category)
+    category: Category
 }
