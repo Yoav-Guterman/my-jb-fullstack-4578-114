@@ -73,7 +73,14 @@ export async function createPost(req: Request, res: Response, next: NextFunction
     try {
         const userId = req.userId
 
-        const post = await Post.create({ ...req.body, userId })
+        let createParams = { ...req.body, userId }
+
+        if (req.imageUrl) {
+            const { imageUrl } = req
+            createParams = { ...createParams, imageUrl }
+        }
+
+        const post = await Post.create(createParams)
         await post.reload(postIncludes)
         res.status(StatusCodes.CREATED).json(post)
     } catch (e) {

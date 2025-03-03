@@ -1,0 +1,21 @@
+{
+    "app": {
+        "port": "3000",
+        "name": "furniture-app",
+        "secret": "MySecret",
+        "jwtSecret": "myJwtSecret"
+    },
+    "db": {
+        "host": "localhost",
+        "port": 3306,
+        "username": "root",
+        "password": "",
+        "database": "furniture"
+    },
+    "sequelize": {
+        "logging": true,
+        "sync": {
+            "force": false
+        }
+    }
+}

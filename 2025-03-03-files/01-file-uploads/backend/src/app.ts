@@ -29,7 +29,6 @@ const app = express();
     // })) // allow this specific clients
 
     app.use(json()) // a middleware to extract the post data and save it to the request object in case the content type of the request is application/json
-
     app.use(fileUpload())
 
     // Apply token extraction to ALL routes
