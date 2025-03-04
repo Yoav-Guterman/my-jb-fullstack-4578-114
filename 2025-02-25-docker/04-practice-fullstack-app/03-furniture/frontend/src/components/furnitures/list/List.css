@@ -1,0 +1,14 @@
+.List {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+    background-color: #f5f5f5;
+    min-height: calc(100vh - 80px);
+}
+
+@media (max-width: 768px) {
+    .List {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,25 +1,43 @@
 .Header {
-    height: 100%;
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: center;
+    background-color: #0051ba;
+    color: white;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.Header div:first-child {
+    font-size: 2rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    color: #ffda1a;
 }
 
 .Header nav {
     display: flex;
-    flex-direction: row;
-    gap: 1rem;
+    gap: 20px;
 }
 
-.Header a {
+.Header nav a {
+    color: white;
     text-decoration: none;
-    color: black;
-
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
 }
 
+.Header nav a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
 
-.Header .active {
-    padding-bottom: 5px;
-    border-bottom: 2px solid black;
+.Header nav a.active {
+    background-color: #ffda1a;
+    color: #0051ba;
 }

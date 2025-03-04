@@ -1,0 +1,21 @@
+.NewPost {
+    margin: 4px;
+    padding: 4px;
+}
+
+.NewPost>form {
+    display: flex;
+    flex-direction: column;
+}
+
+.NewPost form>* {
+    margin-bottom: 3px;
+}
+
+.NewPost .error {
+    color: red;
+}
+
+.NewPost img {
+    width: 300px;
+}

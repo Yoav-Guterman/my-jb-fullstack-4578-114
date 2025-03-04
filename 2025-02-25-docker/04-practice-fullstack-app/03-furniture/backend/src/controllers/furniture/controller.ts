@@ -6,8 +6,8 @@ import { StatusCodes } from "http-status-codes";
 export async function getFurnitures(req: Request, res: Response, next: NextFunction) {
     try {
         const furnitures = await Furniture.findAll({
-            include: [Type],
-        });
+            include: [Type]
+        })
         res.status(StatusCodes.OK).json(furnitures);
     } catch (e) {
         next(e);

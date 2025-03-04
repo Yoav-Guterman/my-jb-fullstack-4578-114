@@ -1,13 +1,22 @@
 import axios from "axios"
+import FurnitureModel from "../models/furniture/FurnitureModel"
+import FurnitureModelDraft from "../models/furniture/FurnitureModelDraft"
 
-class Auth {
-    async add(draft: Draft): Promise<Product> {
-        const response = await axios.post<Product>(`${import.meta.env.VITE_REST_SERVER_URL}/products`, draft)
-        const newProduct = response.data
-        return newProduct
+
+class Furniture {
+    async getAllFurnitures(): Promise<FurnitureModel[]> {
+        const response = await axios.get<FurnitureModel[]>(`${import.meta.env.VITE_REST_SERVER_URL}/furnitures`)
+        const allFurnitures = response.data
+        return allFurnitures
+    }
+
+    async add(draft: FurnitureModelDraft): Promise<FurnitureModel> {
+        const response = await axios.post<FurnitureModel>(`${import.meta.env.VITE_REST_SERVER_URL}/furnitures`, draft)
+        const newFurniture = response.data
+        return newFurniture
     }
 }
 
-const auth = new Auth()
-export default auth
+const furnitureService = new Furniture()
+export default furnitureService
 
