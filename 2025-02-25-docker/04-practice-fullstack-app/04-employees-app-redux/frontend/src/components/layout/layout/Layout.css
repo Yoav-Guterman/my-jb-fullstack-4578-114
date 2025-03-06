@@ -1,0 +1,49 @@
+.Layout {
+    height: 100%;
+    display: grid;
+    grid-template-rows: 1fr 5fr;
+    min-height: 0;
+    /* Important for nested grids */
+}
+
+.Layout>* {
+    overflow: auto;
+    /* Adds scrollbars when content overflows */
+    min-height: 0;
+    /* Allows content to shrink */
+    min-width: 0;
+    /* Allows content to shrink horizontally */
+}
+
+.Layout>header {
+    grid-row: 1;
+    padding: 10px;
+    border-bottom: solid black 1px;
+}
+
+.Layout main {
+    grid-row: 2;
+    padding: 10px;
+}
+
+.Layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.Layout header {
+    background-color: var(--primary-blue);
+    box-shadow: var(--shadow);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.Layout main {
+    flex: 1;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}

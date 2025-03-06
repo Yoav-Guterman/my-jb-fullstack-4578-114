@@ -1,0 +1,48 @@
+.Card {
+    background-color: white;
+    border-radius: 6px;
+    box-shadow: var(--shadow);
+    padding: 1.5rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border-top: 4px solid var(--primary-blue);
+}
+
+.Card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.Card h4 {
+    color: var(--primary-blue);
+    font-size: 1.2rem;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.Card p {
+    margin: 0.5rem 0;
+    color: var(--text-dark);
+    line-height: 1.5;
+}
+
+.Card .deleteButton {
+    margin-top: 1.5rem;
+    text-align: right;
+}
+
+.Card .deleteButton button {
+    background-color: var(--accent-orange);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.Card .deleteButton button:hover {
+    background-color: #d45e12;
+}

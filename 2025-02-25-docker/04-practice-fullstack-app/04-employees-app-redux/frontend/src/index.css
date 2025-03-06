@@ -1,0 +1,27 @@
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-size: 20px;
+}
+
+#root {
+  --primary-blue: #00539b;
+  --secondary-blue: #0070c0;
+  --accent-orange: #f37021;
+  --text-dark: #333333;
+  --text-light: #ffffff;
+  --background-light: #f8f8f8;
+  --border-light: #dcdcdc;
+  --shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+body {
+  font-family: 'Open Sans', Arial, sans-serif;
+  color: var(--text-dark);
+  background-color: var(--background-light);
+  margin: 0;
+  padding: 0;
+}
