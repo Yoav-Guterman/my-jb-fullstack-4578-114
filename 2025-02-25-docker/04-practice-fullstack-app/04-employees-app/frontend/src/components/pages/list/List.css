@@ -1,0 +1,31 @@
+.List {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.List .jobsSelection {
+    width: 100%;
+}
+
+.List select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border-light);
+    border-radius: 4px;
+    font-size: 1rem;
+    background-color: white;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+}
+
+.List select:focus {
+    border-color: var(--secondary-blue);
+    outline: none;
+}
+
+.List>div:last-child {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}

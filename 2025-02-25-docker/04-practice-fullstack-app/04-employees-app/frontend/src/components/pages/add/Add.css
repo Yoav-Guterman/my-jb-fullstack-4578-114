@@ -1,0 +1,63 @@
+.Add {
+    background-color: white;
+    border-radius: 6px;
+    box-shadow: var(--shadow);
+    padding: 2rem;
+    max-width: 600px;
+    margin: 0 auto;
+    border-top: 4px solid var(--primary-blue);
+}
+
+.Add form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.Add input,
+.Add select {
+    padding: 0.75rem;
+    border: 1px solid var(--border-light);
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.Add select {
+    background-color: white;
+}
+
+.Add input:focus,
+.Add select:focus {
+    border-color: var(--secondary-blue);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 112, 192, 0.2);
+}
+
+.Add label {
+    font-weight: 600;
+    color: var(--primary-blue);
+    margin-bottom: -0.5rem;
+}
+
+.Add button {
+    background-color: var(--primary-blue);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 0.75rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-top: 1rem;
+}
+
+.Add button:hover {
+    background-color: var(--secondary-blue);
+}
+
+.Add .error {
+    color: #e74c3c;
+    font-size: 0.85rem;
+    margin-top: -0.5rem;
+}

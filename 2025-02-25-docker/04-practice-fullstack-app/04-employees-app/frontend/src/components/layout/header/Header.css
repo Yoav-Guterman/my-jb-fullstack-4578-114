@@ -1,0 +1,80 @@
+.Header {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.Header nav {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.Header a {
+    text-decoration: none;
+    color: black;
+
+}
+
+
+.Header .active {
+    padding-bottom: 5px;
+    border-bottom: 2px solid black;
+}
+
+.Header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.Header div:first-child {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--text-light);
+}
+
+.Header nav {
+    display: flex;
+    gap: 2rem;
+}
+
+.Header a {
+    color: var(--text-light);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 0.5rem 0;
+    position: relative;
+    transition: color 0.3s;
+}
+
+.Header a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 3px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--accent-orange);
+    transition: width 0.3s;
+}
+
+.Header a:hover {
+    color: var(--text-light);
+}
+
+.Header a:hover::after,
+.Header a.active::after {
+    width: 100%;
+}
+
+.Header a.active {
+    color: var(--text-light);
+}
