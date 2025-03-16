@@ -1,13 +1,16 @@
 import { NextFunction, Request, Response } from 'express';
 import { verify } from 'jsonwebtoken';
 import config from 'config'
+import User from '../../models/user';
 import AppError from '../../errors/app-error';
 import { StatusCodes } from 'http-status-codes';
+import Post from '../../models/post';
 
 declare global {
     namespace Express {
         interface Request {
             userId?: string;
+            post?: Post
         }
     }
 }

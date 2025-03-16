@@ -20,7 +20,7 @@ services:
   backend:
     container_name: sn-compose-backend
     ports:
-      - 3000:3000
+      - 3002:3002
     environment:
       - NODE_ENV=docker
     build: ./backend
