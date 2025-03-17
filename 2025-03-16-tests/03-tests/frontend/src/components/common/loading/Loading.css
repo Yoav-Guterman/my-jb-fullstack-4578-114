@@ -1,0 +1,20 @@
+.Loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+.Loading .small {
+    display: inline;
+    width: 24px;
+}
+
+.Loading .medium {
+    width: 48px;
+}
+
+.Loading .large {
+    width: 96px;
+}
