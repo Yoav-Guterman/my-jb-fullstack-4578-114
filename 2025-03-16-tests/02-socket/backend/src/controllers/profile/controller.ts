@@ -65,6 +65,11 @@ export async function deletePost(req: Request<{ id: string }>, res: Response, ne
             success: true
         })
 
+        socket.emit(SocketMessages.REMOVE_POST, {
+            from: req.headers['x-client-id'], // req.header(), req.get()
+            data: { id: id }
+        })
+
     } catch (e) {
         next(e)
     }
@@ -104,6 +109,10 @@ export async function updatePost(req: Request<{ id: string }>, res: Response, ne
         post.body = body
         await post.save() // this command generates the actual SQL UPDATE
         res.json(post)
+        socket.emit(SocketMessages.UPDATE_POST, {
+            from: req.headers['x-client-id'], // req.header(), req.get()
+            data: post
+        })
 
     } catch (e) {
         next(e)

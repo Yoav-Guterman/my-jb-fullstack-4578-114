@@ -1,6 +1,6 @@
 {
   "name": "02-socket-enums-yoavguterman",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "main": "./dist/socket-enums.js",
   "types": "./dist/socket-enums.d.ts",
   "directories": {
