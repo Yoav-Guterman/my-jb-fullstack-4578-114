@@ -1,0 +1,38 @@
+.Post {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid black;
+    padding: 4px;
+    margin: 10px;
+}
+
+.Post .buttons {
+    margin-right: 5px;
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}
+
+.Post>div {
+    margin-bottom: 5px;
+}
+
+.Post.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+.imageContainer img {
+    height: 200px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
