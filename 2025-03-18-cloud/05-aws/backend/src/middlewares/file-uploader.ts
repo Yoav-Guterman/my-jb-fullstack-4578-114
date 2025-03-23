@@ -5,7 +5,9 @@ import { UploadedFile } from "express-fileupload";
 import path from "path";
 import { v4 } from "uuid";
 import config from 'config'
-import s3Client from "../aws/aws";
+import s3Client from "../aws/s3";
+import sqsClient, { queueUrl } from "../aws/sqs";
+import { SendMessageCommand } from "@aws-sdk/client-sqs";
 
 declare global {
     namespace Express {
@@ -31,6 +33,15 @@ export default async function fileUploader(req: Request, res: Response, next: Ne
     })
 
     const response = await upload.done()
+
+    const sqsResponse = await sqsClient.send(new SendMessageCommand({
+        QueueUrl: queueUrl,
+        MessageBody: JSON.stringify({
+            bucket: response.Bucket,
+            key: response.Key
+        })
+    }))
+    console.log(sqsResponse)
 
     // req.imageUrl = 'https://cdn.britannica.com/55/174255-050-526314B6/brown-Guernsey-cow.jpg'
     // req.imageUrl = response.Location

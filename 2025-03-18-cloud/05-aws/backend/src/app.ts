@@ -12,7 +12,8 @@ import authRouter from "./routers/auth"
 import { extractUserFromToken, requireAuth } from "./middlewares/auth/auth.middleware"
 import cors from 'cors'
 import fileUpload from "express-fileupload"
-import { createAppBucketIfNotExist } from "./aws/aws"
+import { createAppBucketIfNotExist } from "./aws/s3"
+import { createAppQueueIfNotExist, queueUrl } from "./aws/sqs"
 
 
 const force = config.get<boolean>('sequelize.sync.force')
@@ -21,7 +22,10 @@ const app = express();
 
 export async function start() {
     await sequelize.sync({ force })
-    await createAppBucketIfNotExist()
+    await createAppBucketIfNotExist();
+
+    await createAppQueueIfNotExist();
+    console.log(`queue url is ${queueUrl}`)
 
     // basic middleware
     app.use(cors()) // allow any client to use this server
