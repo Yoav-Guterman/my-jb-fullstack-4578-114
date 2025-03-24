@@ -1,11 +1,13 @@
 import { createContext, PropsWithChildren, useEffect, useState } from "react";
 import { io } from "socket.io-client";
 import { useAppDispatch } from "../../redux/hooks";
-import { addComment, newPost } from "../../redux/profileSlice";
+import { addComment, newPost, remove, update } from "../../redux/profileSlice";
 import Post from "../../models/post/Post";
 import { v4 } from "uuid";
 import Comment from "../../models/comment/Comment";
 import SocketMessages from "02-socket-enums-yoavguterman";
+import { follow, unfollow } from "../../redux/followingSlice";
+import User from "../../models/user/User";
 
 interface SocketContextInterface {
     xClientId: string
@@ -49,10 +51,32 @@ export default function Io(props: PropsWithChildren): JSX.Element {
                             dispatch(addComment(newCommentPayload))
                             break;
                         }
+                    case SocketMessages.FOLLOW:
+                        {
+                            const newFollowPayload = payload.data as User
+                            dispatch(follow(newFollowPayload))
+                            break;
+                        }
+                    case SocketMessages.UNFOLLOW:
+                        {
+                            const newUnfollowPayload = payload.data as { userId: string }
+                            dispatch(unfollow(newUnfollowPayload))
+                            break;
+                        }
+                    case SocketMessages.UPDATE_POST:
+                        {
+                            const updatePostPayload = payload.data as Post
+                            dispatch(update(updatePostPayload))
+                            break;
+                        }
+                    case SocketMessages.REMOVE_POST:
+                        {
+                            const removePostPayload = payload.data as { id: string }
+                            dispatch(remove(removePostPayload))
+                            break;
+                        }
                 }
             }
-
-
         })
 
         return () => {

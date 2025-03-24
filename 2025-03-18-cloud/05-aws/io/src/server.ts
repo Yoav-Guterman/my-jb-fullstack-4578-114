@@ -16,6 +16,7 @@ io.on('connection', socket => {
     console.log('got a new connection')
 
     socket.onAny((eventName, payload) => {
+        console.log(`received event ${eventName} with payload`, payload)
         io.emit(eventName, payload)
     })
 

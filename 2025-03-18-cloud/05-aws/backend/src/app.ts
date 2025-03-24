@@ -9,7 +9,6 @@ import followsRouter from "./routers/follows"
 import commentsRouter from "./routers/comments"
 import feedRouter from "./routers/feed"
 import authRouter from "./routers/auth"
-import { extractUserFromToken, requireAuth } from "./middlewares/auth/auth.middleware"
 import cors from 'cors'
 import fileUpload from "express-fileupload"
 import { createAppBucketIfNotExist } from "./aws/s3"
@@ -36,19 +35,11 @@ export async function start() {
     app.use(json()) // a middleware to extract the post data and save it to the request object in case the content type of the request is application/json
     app.use(fileUpload())
 
-    // Apply token extraction to ALL routes
-    // This middleware will try to get the user from JWT if present
-    app.use(extractUserFromToken);
-
-    // public routes (no auth required)
-    app.use('/auth', authRouter);  // Login/signup don't need authentication
-
-
-    // protected routes - apply requireAuth
-    app.use('/profile', requireAuth, profileRouter)
-    app.use('/follows', requireAuth, followsRouter)
-    app.use('/comments', requireAuth, commentsRouter)
-    app.use('/feed', requireAuth, feedRouter)
+    app.use('/auth', authRouter);
+    app.use('/profile', profileRouter)
+    app.use('/follows', followsRouter)
+    app.use('/comments', commentsRouter)
+    app.use('/feed', feedRouter)
 
 
     // special notFound middleware

@@ -18,7 +18,7 @@ declare global {
 }
 
 export default async function fileUploader(req: Request, res: Response, next: NextFunction) {
-    if (!req.files) return next()
+    if (!req.files.postImage) return next()
 
     const postImage = req.files.postImage as UploadedFile
 

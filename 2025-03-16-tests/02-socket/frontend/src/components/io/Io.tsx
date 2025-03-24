@@ -76,6 +76,7 @@ export default function Io(props: PropsWithChildren): JSX.Element {
                         {
                             const updatePostPayload = payload.data as Post
                             dispatch(update(updatePostPayload))
+                            break;
                         }
                 }
             }

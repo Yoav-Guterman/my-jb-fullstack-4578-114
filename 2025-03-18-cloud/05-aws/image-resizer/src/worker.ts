@@ -19,7 +19,7 @@ async function resize(
     height: number,
     key: string,
     bucket: string,
-    ContentType: string,
+    contentType: string,
     suffix: string
 ) {
     const resizedImage = await sharp(photoContent)
@@ -34,77 +34,72 @@ async function resize(
             Bucket: bucket,
             Key: resizedKey,
             Body: resizedImage,
-            ContentType: ContentType
+            ContentType: contentType
         }
     })
 
     const newUploadResponse = await upload.done()
     console.log(newUploadResponse)
+
 }
 
+
 async function work() {
-    // while(true) {
-    const { Messages } = await sqsClient.send(new ReceiveMessageCommand({
-        QueueUrl: config.get<string>('sqs.queueUrl'),
-        MaxNumberOfMessages: 1
-    }))
-    console.log(Messages)
-    if (Messages) {
-        const { Body, ReceiptHandle } = Messages[0]
-
-        const message = JSON.parse(Body!)
-
-        console.log(message)
-
-        const s3Response = await s3Client.send(new GetObjectCommand({
-            Bucket: message.bucket,
-            Key: message.key
+    while (true) {
+        const { Messages } = await sqsClient.send(new ReceiveMessageCommand({
+            QueueUrl: config.get<string>('sqs.queueUrl'),
+            MaxNumberOfMessages: 1
         }))
+        console.log(Messages)
+        if (Messages) {
+            const { Body, ReceiptHandle } = Messages[0]
 
-        console.log(s3Response)
+            const message = JSON.parse(Body!)
 
-        const photoContent = await s3Response.Body?.transformToByteArray()
+            console.log(message)
 
-        console.log(photoContent)
-
-        const metadata = await sharp(photoContent).metadata()
-        console.log(metadata)
-        const { width, height } = metadata;
-
-        try {
-
-
-            await Promise.all([0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9].map(ratio => {
-                resize(
-                    photoContent!,
-                    Math.floor(width! * ratio),
-                    Math.floor(height! * ratio),
-                    message.key,
-                    message.bucket,
-                    s3Response.ContentType!,
-                    (ratio * 100).toString()
-                )
+            const s3Response = await s3Client.send(new GetObjectCommand({
+                Bucket: message.bucket,
+                Key: message.key
             }))
 
+            console.log(s3Response)
+
+            const photoContent = await s3Response.Body?.transformToByteArray()
+
+            console.log(photoContent)
 
 
-            // here we process the image
-            // let's say we're done
+            const metadata = await sharp(photoContent).metadata()
+            console.log(metadata)
+            const { width, height } = metadata;
 
-            await sqsClient.send(new DeleteMessageCommand({
-                QueueUrl: config.get<string>('sqs.queueUrl'),
-                ReceiptHandle,
-            }))
-        } catch (e) {
-            console.log(`there was an error in ${ReceiptHandle}`, e)
+            try {
+                await Promise.all([0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9].map(ratio => {
+                    resize(
+                        photoContent!,
+                        Math.floor(width! * ratio),
+                        Math.floor(height! * ratio),
+                        message.key,
+                        message.bucket,
+                        s3Response.ContentType!,
+                        (ratio * 100).toString()
+                    )
+                }))
+                await sqsClient.send(new DeleteMessageCommand({
+                    QueueUrl: config.get<string>('sqs.queueUrl'),
+                    ReceiptHandle,
+                }))
+
+            } catch (e) {
+                console.log(`there was an error in ${ReceiptHandle}`, e)
+            }
+        } else {
+            console.log('nothing to process....')
         }
 
-    } else {
-        console.log('nothing to process....')
+        await new Promise(resolve => setTimeout(resolve, 1000))
     }
-
-
-    // }
 }
 
 work()
