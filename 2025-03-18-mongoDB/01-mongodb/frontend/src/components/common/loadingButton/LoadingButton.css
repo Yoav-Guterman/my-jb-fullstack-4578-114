@@ -1,0 +1,18 @@
+.LoadingButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    /* Space between message and loading icon */
+    padding: 6px 12px;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+}
+
+/* Ensure the loading icon container doesn't take extra space */
+.LoadingButton .Loading {
+    display: inline-flex;
+    height: auto;
+    width: auto;
+}

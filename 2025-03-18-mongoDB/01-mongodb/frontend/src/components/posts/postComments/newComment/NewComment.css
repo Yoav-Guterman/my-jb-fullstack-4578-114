@@ -1,0 +1,14 @@
+.NewComment form {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+/* .NewComment form button {
+    background-color: rgb(93, 93, 255);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    margin-top: 5px;
+} */
