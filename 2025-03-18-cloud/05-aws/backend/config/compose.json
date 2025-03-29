@@ -9,5 +9,10 @@
         "connection": {
             "endpoint": "http://localstack:4566"
         }
+    },
+    "sqs": {
+        "connection": {
+            "endpoint": "http://localstack:4566"
+        }
     }
 }

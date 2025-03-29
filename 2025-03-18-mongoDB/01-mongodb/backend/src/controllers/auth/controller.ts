@@ -4,6 +4,7 @@ import { createHmac } from "crypto";
 import config from 'config'
 import { sign } from "jsonwebtoken";
 import AppError from "../../errors/app-error";
+import { UserModel } from "../../models/user";
 
 export function hashPassword(password: string): string {
     return createHmac('sha256', config.get<string>('app.secret'))
@@ -13,22 +14,17 @@ export function hashPassword(password: string): string {
 
 export async function login(req: Request<{}, {}, { username: string, password: string }>, res: Response, next: NextFunction) {
     try {
-        // const { username, password } = req.body
-        // const user = await User.findOne({
-        //     where: {
-        //         username,
-        //         password: hashPassword(password)
-        //     },
-        // })
+        const { username, password } = req.body
 
-        // if (!user) return next(
-        //     new AppError(
-        //         StatusCodes.UNAUTHORIZED,
-        //         'wrong credentials'
-        //     ))
+        const user = await UserModel.findOne({
+            username,
+            password: hashPassword(password)
+        })
 
-        // const jwt = sign(user.get({ plain: true }), config.get<string>('app.jwtSecret'))
-        // res.json({ jwt })
+        if (!user) return next(new AppError(StatusCodes.UNAUTHORIZED, 'wrong credentials'))
+
+        const jwt = sign(user.toObject(), config.get<string>('app.jwtSecret'))
+        res.json({ jwt })
     } catch (e) {
         next(e)
     }
@@ -37,22 +33,22 @@ export async function login(req: Request<{}, {}, { username: string, password: s
 export async function signUp(req: Request<{}, {}, { username: string, password: string, name: string }>, res: Response, next: NextFunction) {
 
     const { username, password, name } = req.body
-
     try {
-        // const user = await User.create({
-        //     username,
-        //     password: hashPassword(password),
-        //     name
-        // })
 
-        // const jwt = sign(user.get({ plain: true }), config.get<string>('app.jwtSecret'))
-        // res.json({ jwt })
+        const user = new UserModel({
+            name,
+            username,
+            password: hashPassword(password),
+            createdAt: new Date(),
+            following: []
+        })
+        await user.save()
+
+        const jwt = sign(user.toObject(), config.get<string>('app.jwtSecret'))
+        res.json({ jwt })
 
     } catch (e) {
-        // if (e.name === 'SequelizeUniqueConstraintError') return next({
-        //     status: 409,
-        //     message: `username ${username} already exists. please try different username`
-        // })
+
         if (e.name === 'SequelizeUniqueConstraintError') return next(
             new AppError(
                 StatusCodes.CONFLICT,

@@ -15,7 +15,7 @@ export async function createAppBucketIfNotExist() {
     try {
         await s3Client.send(
             new CreateBucketCommand({
-                Bucket: 'il.co.johnbryce.yoavguterman'
+                Bucket: config.get<string>('s3.bucket')
             })
         )
     } catch (e) {
