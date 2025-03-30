@@ -1,34 +1,41 @@
-import { DatePipe } from '@angular/common';
 import { Component, computed, OnDestroy, OnInit, signal } from '@angular/core';
-import { AllcapsPipe } from '../../../pipes/allcaps.pipe';
-import { FormsModule } from '@angular/forms';
+import { ProfileService } from '../../../services/profile.service';
+import { Post } from '../../../models/post/post.model';
+import { PostComponent } from "../post/post.component";
+
 
 @Component({
   selector: 'app-profile',
-  imports: [DatePipe, AllcapsPipe, FormsModule],
+  imports: [PostComponent],
+  // providers: [ProfileService], // if the components need its own ProfileService
+  // it states here like so...
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })
 export class ProfileComponent implements OnInit, OnDestroy {
-  intervalId: any
-  name: string = 'Bob'
-  currentTime = (new Date())
-  address: string = 'hayarden 5'
-  username = signal<string>('')
-  email = computed(() => `${this.username()}@gmail.com`)
-  isButtonDisabled = true
 
-  sayHi() {
-    alert('Hi!')
-  }
+  profile = signal<Post[]>([])
 
-  ngOnInit(): void {
-    this.intervalId = setInterval(() => {
-      this.currentTime = (new Date())
-    }, 1000)
-  }
+
+  constructor(
+    public profileService: ProfileService
+  ) { }
 
   ngOnDestroy(): void {
-    clearInterval(this.intervalId)
   }
+
+  removePost(id: string) {
+    this.profile.set(this.profile().filter(p => p.id !== id))
+  }
+
+  async ngOnInit(): Promise<void> {
+    try {
+      const profilePost = await this.profileService.getProfile()
+      this.profile.set(profilePost)
+    } catch (e) {
+      console.log(e)
+    }
+
+  }
+
 }
