@@ -2,6 +2,8 @@ import { NextFunction, Request, Response } from "express";
 import { io } from "socket.io-client";
 import socket from "../../io/io";
 import { PostModel } from "../../models/post";
+import AppError from "../../errors/app-error";
+import { StatusCodes } from "http-status-codes";
 
 export async function createComment(req: Request<{ postId: string }>, res: Response, next: NextFunction) {
     try {
@@ -24,6 +26,35 @@ export async function createComment(req: Request<{ postId: string }>, res: Respo
         })
 
         res.json(post.toObject())
+        // socket.emit(SocketMessages.NEW_COMMENT, {
+        //     from: req.headers['x-client-id'], // req.header(), req.get()
+        //     data: comment
+        // })
+    } catch (e) {
+        next(e)
+    }
+}
+
+export async function deleteComment(req: Request<{ commentId: string, postId: string }>, res: Response, next: NextFunction) {
+    try {
+        const userId = req.userId
+
+        const { commentId, postId } = req.params
+
+        const deleteResponse = await PostModel.findOneAndUpdate({
+            _id: postId
+        }, {
+            $pull: {
+                comments: { _id: commentId }
+            }
+        })
+        console.log(deleteResponse)
+        if (!deleteResponse.comments.find(c => c.id === commentId)) {
+            return next(new AppError(StatusCodes.NOT_FOUND, 'comment not found'))
+        }
+
+        res.json({ success: true })
+
         // socket.emit(SocketMessages.NEW_COMMENT, {
         //     from: req.headers['x-client-id'], // req.header(), req.get()
         //     data: comment

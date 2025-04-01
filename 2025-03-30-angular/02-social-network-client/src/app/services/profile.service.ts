@@ -30,6 +30,5 @@ export class ProfileService {
     const observable = this.httpClient.delete<boolean>(`${environment.restServerUrl}/profile/${id}`)
     const isDeleted = firstValueFrom(observable)
     return isDeleted
-
   }
 }

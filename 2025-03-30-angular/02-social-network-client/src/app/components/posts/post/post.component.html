@@ -3,4 +3,9 @@
     <p>by {{post()?.user?.name}} at {{post()?.createdAt}}</p>
     <div>{{post()?.body}}</div>
     <button (click)="deleteMe()">delete</button>
+    <div>
+        <app-comments [comments]="post()?.comments" [postId]="post()?.id">
+        </app-comments>
+
+    </div>
 </div>

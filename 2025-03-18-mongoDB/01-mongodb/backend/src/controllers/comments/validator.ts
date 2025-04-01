@@ -7,3 +7,8 @@ export const newCommentValidator = Joi.object({
 export const newCommentParamsValidator = Joi.object({
     postId: Joi.string().hex().length(24).required()
 })
+
+export const deleteCommentParamsValidator = Joi.object({
+    postId: Joi.string().hex().length(24).required(),
+    commentId: Joi.string().hex().length(24).required()
+})

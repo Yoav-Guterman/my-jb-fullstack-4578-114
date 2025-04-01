@@ -20,12 +20,13 @@ export async function getProfile(req: Request, res: Response, next: NextFunction
 
 export async function getPost(req: Request<{ id: string }>, res: Response, next: NextFunction) {
     try {
-        const post = await PostModel.findById(req.params.id)
+        const post = await PostModel.findById(req.params.id).populate(['user', 'comments.user'])
         res.json(post.toObject())
     } catch (e) {
         next(e)
     }
 }
+
 
 export async function deletePost(req: Request<{ id: string }>, res: Response, next: NextFunction) {
     try {
@@ -52,7 +53,7 @@ export async function createPost(req: Request, res: Response, next: NextFunction
     try {
         const userId = req.userId
 
-        let createParams = { ...req.body, userId }
+        let createParams = { ...req.body, userId, user: userId }
 
         // if (req.imageUrl) {
         //     const { imageUrl } = req
@@ -60,8 +61,9 @@ export async function createPost(req: Request, res: Response, next: NextFunction
         // }
 
         const post = new PostModel(createParams)
-        await post.save()
-        res.json(post.toObject())
+        const newPost = await post.populate(['user', 'comments.user'])
+        newPost.save()
+        res.json(newPost.toObject())
 
         socket.emit(SocketMessages.NEW_POST, {
             from: req.headers['x-client-id'], // req.header(), req.get()

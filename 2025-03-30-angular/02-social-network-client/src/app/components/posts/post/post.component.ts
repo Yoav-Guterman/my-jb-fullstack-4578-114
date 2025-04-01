@@ -1,10 +1,12 @@
-import { Component, input, output } from '@angular/core';
+import { Component, input, output, signal } from '@angular/core';
 import { Post } from '../../../models/post/post.model';
 import { ProfileService } from '../../../services/profile.service';
+import { CommentsComponent } from "../comments/comments.component";
+import { PostComment } from '../../../models/comment/comment.model';
 
 @Component({
   selector: 'app-post',
-  imports: [],
+  imports: [CommentsComponent],
   templateUrl: './post.component.html',
   styleUrl: './post.component.css'
 })
@@ -14,6 +16,8 @@ export class PostComponent {
     public profileService: ProfileService
   ) { }
   post = input<Post>()
+  comments = signal<PostComment[]>([])
+
   deletedPost = output<string>()
 
   async deleteMe() {
