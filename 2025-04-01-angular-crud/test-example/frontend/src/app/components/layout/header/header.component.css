@@ -1,0 +1,20 @@
+p {
+    color: red;
+}
+
+#header {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+#header div:nth-child(2) {
+    display: flex;
+    flex-direction: row;
+    gap: 6px;
+}
+
+.active {
+    color: green;
+}

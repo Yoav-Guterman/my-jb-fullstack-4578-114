@@ -1,0 +1,22 @@
+.Follow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 3px;
+    border: 1px dashed lightgreen;
+    height: fit-content;
+}
+
+.Follow img {
+    width: 32px;
+    border: 1px solid orange;
+}
+
+.Follow .name {
+    color: rgb(70, 70, 255);
+    font-size: 16px;
+}
+
+.Follow button:hover {
+    cursor: pointer;
+}
