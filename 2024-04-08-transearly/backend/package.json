@@ -21,6 +21,7 @@
     "axios": "^1.7.9",
     "config": "^3.3.12",
     "cors": "^2.8.5",
+    "dropbox": "^10.34.0",
     "express": "^4.21.2",
     "express-fileupload": "^1.5.1",
     "http-status-codes": "^2.3.0",

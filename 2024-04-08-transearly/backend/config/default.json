@@ -1,7 +1,7 @@
 {
     "app": {
         "port": "3000",
-        "name": "twitter dev",
+        "name": "transearly app",
         "secret": "MySecret",
         "jwtSecret": "myJwtSecret"
     },
