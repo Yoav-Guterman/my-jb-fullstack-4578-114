@@ -1,0 +1,40 @@
+{
+    "s3": {
+        "bucket": "il.co.johnbryce.yoavguterman",
+        "isLocalstack": true,
+        "connection": {
+            "region": "us-east-1",
+            "forcePathStyle": true,
+            "credentials": {
+                "accessKeyId": "test",
+                "secretAccessKey": "test"
+            },
+            "endpoint": "http://localhost:4566"
+        }
+    },
+    "sqs": {
+        "isLocalstack": true,
+        "queueName": "yoavguterman-sn-queue",
+        "docxToTxtQueueUrl": "http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/yoavguterman-docx-to-txt",
+        "translateQueueUrl": "http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/yoavguterman-translate",
+        "connection": {
+            "region": "us-east-1",
+            "forcePathStyle": true,
+            "credentials": {
+                "accessKeyId": "test",
+                "secretAccessKey": "test"
+            },
+            "endpoint": "http://localhost:4566"
+        }
+    },
+    "convertApi": {
+        "secret": "secret_irKc5yxSptqY3pA5"
+    },
+    "languages": [
+        "french",
+        "uzbek",
+        "malayalam",
+        "italian",
+        "hebrew"
+    ]
+}
