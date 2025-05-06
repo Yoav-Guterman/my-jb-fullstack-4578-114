@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react';
-import './App.css'
-import { useSearchParams } from 'react-router-dom';
-import { loadStripe } from '@stripe/stripe-js';
 import { Elements, PaymentElement, useElements, useStripe } from '@stripe/react-stripe-js';
-import axios from 'axios';
+import { loadStripe } from '@stripe/stripe-js';
+import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import './App.css';
+import axios from 'axios'
+import { jwtDecode } from 'jwt-decode';
 
 const CheckoutForm = () => {
   const stripe = useStripe();
@@ -60,6 +61,10 @@ const CheckoutForm = () => {
   );
 };
 
+
+
+
+
 function App() {
   const stripePromise = loadStripe('pk_test_51MfOVTCMizDvBNeK8KuggydLpRzahq6hbeEgxYaWtEB1H3HtgdMz7loAT2tsbEujGARuDn8Reu1ewHxp1HoSqqpL00nMPTyJwQ');
 
@@ -67,12 +72,13 @@ function App() {
   const [jwt, setJwt] = useState<string>('')
   const [isPaying, setIsPaying] = useState<boolean>(false)
 
-
   useEffect(() => {
-    if (searchParams.get('jwt')) {
-      setJwt(searchParams.get('jwt')!)
+    if (localStorage.getItem('jwt')) {
+      setJwt(localStorage.getItem('jwt')!)
     }
-  }, [])
+  },
+
+    [])
 
   useEffect(() => {
     if (searchParams.get('jwt')) {
@@ -93,6 +99,7 @@ function App() {
     }
 
   }, [searchParams])
+
 
   return (
     <>
@@ -115,8 +122,5 @@ function App() {
   )
 }
 
-export default App
-function jwtDecode(jwt: string): any {
-  throw new Error('Function not implemented.');
-}
 
+export default App
