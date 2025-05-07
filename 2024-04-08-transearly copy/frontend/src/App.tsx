@@ -66,7 +66,7 @@ const CheckoutForm = () => {
 
 
 function App() {
-  const stripePromise = loadStripe('pk_test_51MfOVTCMizDvBNeK8KuggydLpRzahq6hbeEgxYaWtEB1H3HtgdMz7loAT2tsbEujGARuDn8Reu1ewHxp1HoSqqpL00nMPTyJwQ');
+  const stripePromise = loadStripe('pk_test_51RJecgRhumcVEJuaeheJG002DZrSFj3m1y79g0uNQpnC5U8SY6JXFGwcKCvxWnlrAkJqv7RaEtyDzsr95t3t72w400VTK96Vgx');
 
   const [searchParams] = useSearchParams();
   const [jwt, setJwt] = useState<string>('')

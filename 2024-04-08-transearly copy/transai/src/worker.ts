@@ -23,7 +23,6 @@ async function work() {
     while (true) {
 
         try {
-            RunStepsPage
             console.log('working...')
 
             const { Messages } = await sqsClient.send(new ReceiveMessageCommand({
@@ -37,7 +36,6 @@ async function work() {
 
                 // get the text to translate
                 const axiosResponse = await axios(payload.link)
-                console.log(payload.link)
                 console.log(`translation is ${axiosResponse.data}`)
 
                 const response = await chatGpt.responses.create({

@@ -3,6 +3,7 @@ import errorLogger from "./middlewares/error/error-logger"
 import errorResponder from "./middlewares/error/error-responder"
 import notFound from "./middlewares/not-found"
 import cors from 'cors'
+import stripeRouter from "./routers/stripe"
 import { connect } from "./db/mongoose"
 import dropboxRouter from "./routers/dropbox"
 import dropboxAuth from "./auth/dropbox"
@@ -22,6 +23,7 @@ export async function start() {
     app.use(json()) // a middleware to extract the post data and save it to the request object in case the content type of the request is application/json
 
     app.use('/dropbox', dropboxAuth.initialize(), dropboxRouter)
+    app.use('/stripe', stripeRouter)
 
     // special notFound middleware
     app.use(notFound)
